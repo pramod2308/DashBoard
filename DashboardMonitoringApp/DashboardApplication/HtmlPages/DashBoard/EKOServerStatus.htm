@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" data-ng-app="app">
+<head>
+    <title></title>
+    <link href="../../bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />       
+    <link href="../../Styles/DashBoard.css" rel="stylesheet" type="text/css" />
+
+    <script src="../../JS/jquery.js" type="text/javascript"></script>          
+    <script src="../../JS/Comman/angular.js" type="text/javascript"></script>
+    <script src="../../JS/app.js" type="text/javascript"></script>
+    <script src="../../JS/main.js" type="text/javascript"></script>    
+    <script src="../../JS/DashBoard/EKOServerStatusCtrl.js" type="text/javascript"></script>    
+       
+    <style rel="stylesheet" type="text/css">
+        #ekodashboardtable
+        {
+            font-size: 12px;
+            counter-reset: serial-number; 
+        }
+        
+        #ekodashboardtable td:first-child:before
+        {
+            counter-increment: serial-number;
+            content: counter(serial-number);
+        }          
+        .fixed_headers th
+        {
+            text-decoration: none;
+        }
+        .fixed_headers th, .fixed_headers td
+        {
+            padding: 2px;
+            text-align: center;
+        }
+
+        .fixed_headers thead
+        {
+            background-color: #6b668c;
+            color: #fdfdfd;
+        }
+      
+        .fixed_headers tbody
+        {
+            overflow: auto;
+            width: 100%;
+            height: 350px;
+        }
+        .fixed_headers td:nth-child(1), .fixed_headers th:nth-child(1)
+        {
+            min-width: 120px;
+        }
+        .fixed_headers td:nth-child(2), .fixed_headers th:nth-child(2)
+        {
+            min-width: 120px;
+        }
+        .fixed_headers td:nth-child(3), .fixed_headers th:nth-child(3)
+        {
+            min-width: 120px;
+        }
+        .fixed_headers tbody tr:nth-child(even)
+        {
+            background-color: #DCDCDC;
+        }
+        .old_ie_wrapper
+        {
+            height: 300px;
+            width: 1000px;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        .old_ie_wrapper tbody
+        {
+            height: auto;
+        }            
+    </style>
+</head>
+<body ng-controller="EKOServerStatusCtrl">
+<div style="width:90%;margin:0px auto">
+<form name="ekodashBoard">
+    <input type="button" value="Sort" ng-click="Sorting()" />
+    <a href="EKOServerStatus.htm">Refresh</a>
+
+    <div style="float:right;margin-right:70px">
+    <select ng-model="Time" ng-change="changedValue(Time)" 
+            data-ng-options="item as item.Time for item in Option">
+      <option value="">Last 2 Minute</option>
+    </select>
+     {{item.Time}}
+    
+    <input type="text" id="search_field" ng-model="search"  placeholder="Search Box"/>     
+     </div>  
+    </form>
+ <div id="loader" style="display:none">       
+    </div>
+<hr style="height:2px;color:Black" />
+    <table   id="ekodashboardtable"  class="fixed_headers" style="margin: 0px auto;">
+        <thead>
+            <tr>
+                <th>
+                    Serial No.
+                </th>
+                <th>
+                    Node Server
+                </th>
+                <th>
+                  Req Count
+                </th>                
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="data in Response | orderBy:sortType:sortReverse | filter:search">
+                <td></td>
+                <td>{{data.Node_Server}}</td>
+                <td>{{data.Req_Count}}</td>                                                       
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

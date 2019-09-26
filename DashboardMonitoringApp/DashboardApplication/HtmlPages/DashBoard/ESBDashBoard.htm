@@ -1,0 +1,299 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" data-ng-app="app">
+<head>
+    <title></title>
+    <link href="../../bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />       
+    <link href="../../Styles/DashBoard.css" rel="stylesheet" type="text/css" />
+
+    <script src="../../JS/jquery.js" type="text/javascript"></script>              
+    <script src="../../JS/Comman/angular.js" type="text/javascript"></script>    
+    <script src="../../JS/app.js" type="text/javascript"></script>
+    <script src="../../JS/main.js" type="text/javascript"></script>
+    <script src="../../JS/DashBoard/ESBDashboardCtrl.js" type="text/javascript"></script>   
+
+ <style type="text/css">
+        .glyphicon-arrow-right:before
+        {
+            content: "\e092";
+        }
+        #esbdashboardtable
+        {
+            font-size: 12px;
+            counter-reset: serial-number;
+        }
+        
+        #esbdashboardtable #serial:first-child:before
+        {
+            counter-increment: serial-number;
+            content: counter(serial-number);
+        }
+        .fixed_headers thead tr th, .fixed_headers tbody tr td
+        {
+            padding: 2px;
+            text-align: center;
+        }
+        
+        .fixed_headers thead
+        {
+            background-color: #6b668c;
+            color: #ffffff;
+        }
+        
+        .fixed_headers tbody tr:nth-child(even)
+        {
+            background-color: #DCDCDC;
+        }
+        
+    </style>
+</head>
+<body ng-controller="ctrlESB">
+<div style="width:80%;margin:0px auto;">
+    <form name="firstdashBoard">
+    <input type="button" value="Sort" ng-click="Sorting()" />
+    <a style="padding-right:30px" href="ESBDashBoard.htm">Refresh</a>
+    {{requetype}}
+    <div style="float:right;margin-bottom:10px;margin-right:10px">
+    <b>Request Type :</b>
+    <select ng-model="RequestType" ng-change="GetServiceAndMethodID(RequestType)" 
+            data-ng-options="item as item.Request_Type for item in RequestTypeResponse">
+      <option value="">--Select--</option>
+    </select>
+     {{item.Request_Type}}
+    
+     <b>Duration :</b>
+    <select ng-model="Time" ng-change="changedValue(Time)" 
+            data-ng-options="item as item.Time for item in Option">
+      <option value="">Last 2 Minute</option>
+    </select>
+     {{item.Time}}
+      
+    <!--<input type="text" id="search_field" ng-model="search"  placeholder="Search Box"/>   -->  
+     </div>  
+    </form>
+    <div id="loader" style="display:none">       
+    </div>    
+
+    <table id="esbdashboardtable" class="table table-stripped">
+            <thead>
+                <tr>
+                    <th>
+                        Layer
+                    </th>
+                    <th>
+                        <table class="table table-stripped">
+                            <tr>
+                                <th style="padding-right:67px">
+                                    Merchant
+                                </th>
+                                <th style="text-align: center;">
+                                    Count
+                                </th>
+                                 <th style="text-align: center;">
+                                    Average
+                                </th>
+                            </tr>
+                        </table>
+                    </th>
+                    <th>
+                        <table class="table table-stripped">
+                            <tr>
+                                <th style="padding-right:67px">
+                                    Branch
+                                </th>
+                                <th style="text-align: center;">
+                                    Count
+                                </th>
+                                <th style="text-align: center;">
+                                    Average
+                                </th>
+                            </tr>
+                        </table>
+                    </th>
+                </tr>
+            </thead>      
+            <tbody>
+                <tr>                
+                    <td>
+                        UI
+                    </td>
+                    <td>
+                        <table class="table table-stripped">
+                        <tr ng-repeat="data in resultValue=(Response | filter:'UI_Merchant')">
+                            <!--<tr ng-repeat="data in Response">-->
+                                <td ng-if="data.Layer=='UI_Merchant'">
+                                    {{data.Node_IP_Address}}
+                                </td>
+                                <td ng-if="data.Layer=='UI_Merchant'" style="text-align: center;">
+                                    {{data.Count}}
+                                </td>
+                                <td ng-if="data.Layer=='UI_Merchant'" style="text-align: center;">
+                                    {{data.AVGS}}
+                                </td>
+                            </tr>                            
+                            <tr>
+                            <td><b>Total :</b></td>
+                            <td style="text-align: center;"><b>{{resultValue | sumOfValue:'Count'}}</b></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <table class="table table-stripped">
+                            <tr ng-repeat="data in resultValue=(Response | filter:'UI_Branch')">
+                            <!--<tr ng-repeat="data in Response">-->
+                                <td ng-if="data.Layer=='UI_Branch'">
+                                    {{data.Node_IP_Address}}
+                                </td>
+                                <td ng-if="data.Layer=='UI_Branch'" style="text-align: center;">
+                                    {{data.Count}}
+                                </td>
+                                <td ng-if="data.Layer=='UI_Branch'" style="text-align: center;">
+                                    {{data.AVGS}}
+                                </td>
+                            </tr>                            
+                            <tr>
+                            <td><b>Total :</b></td>
+                            <td style="text-align: center;"><b>{{resultValue | sumOfValue:'Count'}}</b></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        BLL
+                    </td>
+                    <td>
+                        <table class="table table-stripped">
+                            <tr ng-repeat="data in resultValue=(Response | filter:'BLL_Merchant')">
+                            <!--<tr ng-repeat="data in Response">-->
+                                <td ng-if="data.Layer=='BLL_Merchant'">
+                                    {{data.Node_IP_Address}}
+                                </td>
+                                <td ng-if="data.Layer=='BLL_Merchant'" style="text-align: center;">
+                                    {{data.Count}}
+                                </td>
+                                <td ng-if="data.Layer=='BLL_Merchant'" style="text-align: center;">
+                                    {{data.AVGS}}
+                                </td>
+                            </tr>                            
+                            <tr>
+                            <td><b>Total :</b></td>
+                            <td style="text-align: center;"><b>{{resultValue | sumOfValue:'Count'}}</b></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <table class="table table-stripped">
+                            <tr ng-repeat="data in resultValue=(Response | filter:'BLL_Branch')">
+                            <!--<tr ng-repeat="data in Response">-->
+                                <td ng-if="data.Layer=='BLL_Branch'">
+                                    {{data.Node_IP_Address}}
+                                </td>
+                                <td ng-if="data.Layer=='BLL_Branch'" style="text-align: center;">
+                                    {{data.Count}}
+                                </td>
+                                <td ng-if="data.Layer=='BLL_Branch'" style="text-align: center;">
+                                    {{data.AVGS}}
+                                </td>
+                            </tr>                           
+                            <tr>
+                            <td><b>Total :</b></td>
+                            <td style="text-align: center;"><b>{{resultValue | sumOfValue:'Count'}}</b></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        ESB
+                    </td>
+                    <td>
+                        <table class="table table-stripped">
+                            <tr ng-repeat="data in resultValue=(Response | filter:'ESB_Merchant')">
+                            <!--<tr ng-repeat="data in Response">-->
+                                <td ng-if="data.Layer=='ESB_Merchant'">
+                                    {{data.Node_IP_Address}}
+                                </td>
+                                <td ng-if="data.Layer=='ESB_Merchant'" style="text-align: center;">
+                                    {{data.Count}}
+                                </td>
+                                <td ng-if="data.Layer=='ESB_Merchant'" style="text-align: center;">
+                                    {{data.AVGS}}
+                                </td>
+                            </tr>                           
+                            <tr>
+                            <td><b>Total :</b></td>
+                            <td style="text-align: center;"><b>{{resultValue | sumOfValue:'Count'}}</b></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <table class="table table-stripped">
+                            <tr ng-repeat="data in resultValue=(Response | filter:'ESB_Branch')">
+                            <!--<tr ng-repeat="data in Response">-->
+                                <td ng-if="data.Layer=='ESB_Branch'">
+                                    {{data.Node_IP_Address}}
+                                </td>
+                                <td ng-if="data.Layer=='ESB_Branch'" style="text-align: center;">
+                                    {{data.Count}}
+                                </td>
+                                <td ng-if="data.Layer=='ESB_Branch'" style="text-align: center;">
+                                    {{data.AVGS}}
+                                </td>
+                            </tr>                           
+                            <tr>
+                            <td><b>Total :</b></td>
+                            <td style="text-align: center;"><b>{{resultValue | sumOfValue:'Count'}}</b></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        CBS
+                    </td>
+                    <td>
+                        <table class="table table-stripped">
+                            <tr ng-repeat="data in resultValue=(Response | filter:'CBS_Merchant')">
+                            <!--<tr ng-repeat="data in Response">-->
+                                <td ng-if="data.Layer=='CBS_Merchant'">
+                                    {{data.Node_IP_Address}}
+                                </td>
+                                <td ng-if="data.Layer=='CBS_Merchant'" style="text-align: center;">
+                                    {{data.Count}}
+                                </td>
+                                <td ng-if="data.Layer=='CBS_Merchant'" style="text-align: center;">
+                                    {{data.AVGS}}
+                                </td>
+                            </tr>                           
+                            <tr>
+                            <td><b>Total :</b></td>
+                            <td style="text-align: center;"><b>{{resultValue | sumOfValue:'Count'}}</b></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <table class="table table-stripped">
+                            <tr ng-repeat="data in resultValue=(Response | filter:'CBS_Branch')">
+                            <!--<tr ng-repeat="data in Response">-->
+                                <td ng-if="data.Layer=='CBS_Branch'">
+                                    {{data.Node_IP_Address}}
+                                </td>
+                                <td ng-if="data.Layer=='CBS_Branch'" style="text-align: center;">
+                                    {{data.Count}}
+                                </td>
+                                <td ng-if="data.Layer=='CBS_Branch'" style="text-align: center;">
+                                    {{data.AVGS}}
+                                </td>
+                            </tr>
+                            <tr>
+                            <td><b>Total :</b></td>
+                            <td style="text-align: center;"><b>{{resultValue | sumOfValue:'Count'}}</b></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>   
+    </div>  
+</body>
+</html>

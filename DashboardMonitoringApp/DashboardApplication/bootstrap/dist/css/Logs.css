@@ -1,0 +1,48 @@
+﻿body
+{
+}
+.abc
+{
+    display: inline-block;
+    overflow: auto;
+    max-height: 500px;
+    border: 1px solid black;
+    font-size: 12px;
+    width: 100%;    
+}
+.abc th, .abc td
+{
+    padding: 2px;
+    text-align: center;
+}
+
+a
+{
+    color: White;
+}
+a:hover
+{
+    color: blue;
+    background-color: transparent;
+}
+
+.design-input input
+{
+    color: rgba(0,0,0,0.87);
+    font-size: 14px;
+    font-family: Roboto, "Helvetica Neue" ,sans-serif;
+    font-weight: normal;
+    padding: 15px 10px 2px 5px;
+    display: block;
+    width: 100%;
+    background-color: transparent;
+    background-image: none;
+    border-radius: 0px;
+    box-shadow: none;
+    border-bottom-width: thin;
+    border-bottom-color: rgba(0,0,0,0.12);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    margin: 15px 0 0 0;
+}

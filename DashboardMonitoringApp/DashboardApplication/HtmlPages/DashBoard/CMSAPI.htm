@@ -1,0 +1,223 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" data-ng-app="app">
+<head>
+    <title></title>
+    <link href="../../bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="../../Styles/DashBoard.css" rel="stylesheet" type="text/css" />
+    <script src="../../JS/jquery.js" type="text/javascript"></script>
+    <script src="../../JS/Comman/angular.js" type="text/javascript"></script>
+    <script src="../../JS/app.js" type="text/javascript"></script>
+    <script src="../../JS/main.js" type="text/javascript"></script>
+    <script src="../../JS/DashBoard/CMSAPICtrl.js" type="text/javascript"></script>
+    <script src="../../bootstrap/dist/js/bootstrap.js" type="text/javascript"></script>
+    <style rel="stylesheet" type="text/css">
+        .glyphicon-arrow-right:before
+        {
+            content: "\e092";
+        }
+        #ekodashboardtable
+        {
+            font-size: 12px;
+            counter-reset: serial-number;
+        }
+        
+        #ekodashboardtable #serial:first-child:before
+        {
+            counter-increment: serial-number;
+            content: counter(serial-number);
+        }
+        
+        #ekodashboardtable2
+        {
+            font-size: 12px;
+            counter-reset: serial-number;
+        }
+        
+        #ekodashboardtable2 #serial1:first-child:before
+        {
+            counter-increment: serial-number;
+            content: counter(serial-number);
+        }
+        .fixed_headers thead tr th, .fixed_headers tbody tr td
+        {
+            padding: 2px;
+            text-align: center;
+        }
+        
+        .fixed_headers thead
+        {
+            background-color: #6b668c;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body ng-controller="CMSAPICtrl">
+    <div style="width: 100%; margin: 0px auto">
+        <form name="ekodashBoard">
+        <input type="button" value="Sort" ng-click="Sorting()" />
+        <a href="CMSAPI.htm">Refresh</a>
+        <div style="float: right; margin-right: 70px">
+            <select ng-model="Time" ng-change="changedValue(Time)" data-ng-options="item as item.Time for item in Option">
+                <option value="">Last 2 Minute</option>
+            </select>
+            {{item.Time}}
+            <input type="text" id="search_field" ng-model="search" placeholder="Search Box" />
+        </div>
+        </form>
+        <div id="loader" style="display: none">
+        </div>
+        <hr style="height: 2px; color: Black" />
+        <table id="ekodashboardtable" class="table table-stripped fixed_headers">
+            <thead>
+                <tr>
+                    <th>
+                        Serial No.
+                    </th>
+                    <th style="text-align: left">
+                        Client Name
+                    </th>
+                    <th style="text-align: left">
+                        Request Type
+                    </th>
+                    <th>
+                        Initiated
+                    </th>
+                    <th>
+                        Success
+                    </th>
+                    <th>
+                        Failed
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="data in resultValue=(Response | orderBy:sortType:sortReverse | filter:search)">
+                    <td id="serial">
+                    </td>
+                    <td style="text-align: left">
+                        {{data.ClientName}}
+                    </td>
+                    <td style="text-align: left">
+                        {{data.Request_Type}}
+                    </td>
+                    <td>
+                        {{data.Initiated}}
+                    </td>
+                    <td>
+                        <a data-ng-click="GetSuccessData(data.PartnerID,data.productcode)" style="position: relative"
+                            data-toggle="collapse" data-target="#{{data.ClientName | spaceless}}{{data.Request_Type | spaceless}}2">
+                            <label class="font-bold" style="cursor: pointer">
+                                {{data.Success}}
+                            </label>
+                        </a>
+                        <ul class="collapse" id="{{data.ClientName | spaceless}}{{data.Request_Type | spaceless}}2">
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label style="color: Blue">
+                                            ClientName</label></div>
+                                    <div class="col-md-3">
+                                        <label style="color: Blue">
+                                            Response Code</label></div>
+                                    <div class="col-md-3" style="color: Blue">
+                                        <label>
+                                            Message</label></div>
+                                    <div class="col-md-3" style="color: Blue">
+                                        <label>
+                                            Count</label></div>
+                                </div>
+                                <div ng-repeat="data in SuccessResponse">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label>
+                                                {{data.ClientName}}</label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label>
+                                                {{data.ResponseCode}}</label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label>
+                                                {{data.DisplayMesage}}</label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label>
+                                                {{data.Count}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        <a data-ng-click="GetFailedData(data.PartnerID,data.productcode)" style="position: relative"
+                            data-toggle="collapse" data-target="#{{data.ClientName | spaceless}}{{data.Request_Type | spaceless}}1">
+                            <label class="font-bold" style="cursor: pointer">
+                                {{data.Failed}}
+                            </label>
+                        </a>
+                        <ul class="collapse" id="{{data.ClientName | spaceless}}{{data.Request_Type | spaceless}}1">
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label style="color: Blue">
+                                            ClientName</label></div>
+                                    <div class="col-md-3">
+                                        <label style="color: Blue">
+                                            Response Code</label></div>
+                                    <div class="col-md-3" style="color: Blue">
+                                        <label>
+                                            Message</label></div>
+                                    <div class="col-md-3" style="color: Blue">
+                                        <label>
+                                            Count</label></div>
+                                </div>
+                                <div ng-repeat="data in FailedResponse">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label>
+                                                {{data.ClientName}}</label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label>
+                                                {{data.ResponseCode}}</label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label>
+                                                {{data.DisplayMesage}}</label>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label>
+                                                    {{data.Count}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        <b>All Total :</b>
+                    </td>
+                    <td>
+                        <b>{{resultValue | sumOfValue:'Initiated'}}</b>
+                    </td>
+                    <td>
+                        <b>{{resultValue | sumOfValue:'Success'}}</b>
+                    </td>
+                    <td>
+                        <b>{{resultValue | sumOfValue:'Failed'}}</b>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,215 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" data-ng-app="app">
+<head>
+    <title></title>
+    <link href="../../bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="../../Styles/DashBoard.css" rel="stylesheet" type="text/css" />
+    <script src="../../JS/jquery.js" type="text/javascript"></script>
+    <script src="../../Datatable/jquery-ui-1.11.4.js" type="text/javascript"></script>
+    <script src="../../JS/Comman/angular.js" type="text/javascript"></script>
+    <script src="../../JS/app.js" type="text/javascript"></script>
+    <script src="../../JS/main.js" type="text/javascript"></script>
+    <script src="../../JS/DashBoard/DMS_Account_DashBoardCtrl.js" type="text/javascript"></script>
+    <style type="text/css">
+        .glyphicon-arrow-right:before
+        {
+            content: "\e092";
+        }
+        #dmsdashboardtable
+        {
+            font-size: 12px;
+            counter-reset: serial-number;
+        }
+        
+        #dmsdashboardtable #serial:first-child:before
+        {
+            counter-increment: serial-number;
+            content: counter(serial-number);
+        }
+        .fixed_headers thead tr th, .fixed_headers tbody tr td
+        {
+            padding: 2px;
+            text-align: center;
+        }
+        
+        .fixed_headers thead
+        {
+            background-color: #6b668c;
+            color: #ffffff;
+        }
+        
+        .fixed_headers tbody tr:nth-child(even)
+        {
+            background-color: #DCDCDC;
+        }
+    </style>
+</head>
+<body ng-controller="DMSAccountCtrl">
+    <form name="firstdashBoard">
+    <input type="button" value="Sort" ng-click="Sorting()" />
+    <a href="DMSDashBoard.htm">Refresh</a>
+    <div style="float: right; margin-bottom: 10px; margin-right: 10px">
+        <select ng-model="Time" ng-change="changedValue(Time)" data-ng-options="item as item.Time for item in Option">
+            <option value="">Last 2 Minute</option>
+        </select>
+        {{item.Time}}
+        <input type="text" id="search_field" ng-model="search" placeholder="Search Box" />
+    </div>
+    </form>
+    <div id="loader" style="display: none">
+    </div>
+    <table id="dmsdashboardtable" class="table table-stripped fixed_headers" style="padding: 2px">
+        <thead>
+            <tr>
+                <td>
+                    SrNo
+                </td>
+                <td>
+                    ...DATE...
+                </td>
+                <td>
+                    HOUR
+                </td>
+                <td>
+                    RECON_SUCCESS
+                </td>
+                <td>
+                    RECON_FAILED
+                </td>
+                <td>
+                    AOF_SUCCESS
+                </td>
+                <td>
+                    AOF_FAILED
+                </td>
+                <td>
+                    AOF_TOTAL
+                </td>
+                <td>
+                    DMS_PENDING
+                </td>
+                <td>
+                    DMS_ACCEPT
+                </td>
+                <td>
+                    DMS_REVISION
+                </td>
+                <td>
+                    DMS_NEEDAPPROVAL
+                </td>
+                <td>
+                    DMS_DEVIATION
+                </td>
+                <td>
+                    DMS_DISCARD
+                </td>
+                <td>
+                    DVU_TOTAL
+                </td>
+                <td>
+                    DMS_A_APPROVED
+                </td>
+                <td>
+                    DMS_A_BACKTOMKR
+                </td>
+                <td>
+                    DMS_A_DEVIATION
+                </td>
+                <td>
+                    DMS_A_DISCARD
+                </td>
+                <td>
+                    DMS_DISCARD_FILE
+                </td>
+                <td>
+                    DMS_A_REVISION
+                </td>
+                <td>
+                    CBS_PENDING
+                </td>
+                <td>
+                    CBS_SUCCESS
+                </td>
+                <td>
+                    CBS_FAILED
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="data in ESBResponse | orderBy:sortType:sortReverse ">
+                <td id="serial">
+                </td>
+                <td style="width:100px;">
+                    {{data.DATE | date  :'yyyy-MM-dd'}}
+                </td>
+                <td>
+                    {{data.HOURS}}
+                </td>
+                <td>
+                    {{data.RECON_SUCCESS}}
+                </td>
+                <td>
+                    {{data.RECON_FAILED}}
+                </td>
+                <td>
+                    {{data.AOF_SUCCESS}}
+                </td>
+                <td>
+                    {{data.AOF_FAILED}}
+                </td>
+                <td>
+                    {{data.AOF_TOTAL}}
+                </td>
+                <td>
+                    {{data.DMS_PENDING}}
+                </td>
+                <td>
+                    {{data.DMS_ACCEPT}}
+                </td>
+                <td>
+                    {{data.DMS_REVISION}}
+                </td>
+                <td>
+                    {{data.DMS_NEEDAPPROVAL}}
+                </td>
+                <td>
+                    {{data.DMS_DEVIATION}}
+                </td>
+                <td>
+                    {{data.DMS_DISCARD}}
+                </td>
+                <td>
+                    {{data.DVU_TOTAL}}
+                </td>
+                <td>
+                    {{data.DMS_A_APPROVED}}
+                </td>
+                <td>
+                    {{data.DMS_A_BACKTOMKR}}
+                </td>
+                <td>
+                    {{data.DMS_A_DEVIATION}}
+                </td>
+                <td>
+                    {{data.DMS_A_DISCARD}}
+                </td>
+                <td>
+                    {{data.DMS_DISCARD_FILE}}
+                </td>
+                <td>
+                    {{data.DMS_A_REVISION}}
+                </td>
+                <td>
+                    {{data.CBS_PENDING}}
+                </td>
+                <td>
+                    {{data.CBS_SUCCESS}}
+                </td>
+                <td>
+                    {{data.CBS_FAILED}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

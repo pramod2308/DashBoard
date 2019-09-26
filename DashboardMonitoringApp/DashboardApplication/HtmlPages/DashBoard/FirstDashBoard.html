@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" data-ng-app="app">
+<head>
+    <title></title>
+    <link href="../../bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" /> 
+    <link href="../../Styles/dragtable.css" rel="stylesheet" type="text/css" />
+    <link href="../../Styles/DashBoard.css" rel="stylesheet" type="text/css" />
+
+    <script src="../../JS/jquery.js" type="text/javascript"></script>
+    <script src="../../Datatable/jquery-ui-1.11.4.js" type="text/javascript"></script>
+    <script src="../../JS/jquery.dragtable.js" type="text/javascript"></script>         
+    <script src="../../JS/Comman/angular.js" type="text/javascript"></script>    
+    <script src="../../JS/app.js" type="text/javascript"></script>
+    <script src="../../JS/main.js" type="text/javascript"></script>
+    <script src="../../JS/DashBoard/FirstDashBoardCtrl.js" type="text/javascript"></script>   
+         
+    <style type="text/css">
+        .glyphicon-arrow-right:before
+        {
+            content: "\e092";
+        }
+        #firstdashboardtable
+        {
+            font-size: 12px;
+            counter-reset: serial-number;
+        }
+        
+        #firstdashboardtable #serial:first-child:before
+        {
+            counter-increment: serial-number;
+            content: counter(serial-number);
+        }
+        .fixed_headers thead tr th, .fixed_headers tbody tr td
+        {
+            padding: 2px;
+            text-align: center;
+        }
+        
+        .fixed_headers thead
+        {
+            background-color: #6b668c;
+            color: #ffffff;
+        }
+        
+        .fixed_headers tbody tr:nth-child(even)
+        {
+            background-color: #DCDCDC;
+        }
+        
+    </style>
+</head>
+<body ng-controller="FirstDashBoardCtrl">
+    <form name="firstdashBoard">
+    <input type="button" value="Sort" ng-click="Sorting()" />
+    <a href="FirstDashBoard.html">Refresh</a>
+
+    <div style="float:right;margin-bottom:10px;margin-right:10px">
+    <select ng-model="Time" ng-change="changedValue(Time)" 
+            data-ng-options="item as item.Time for item in Option">
+      <option value="">Last 2 Minute</option>
+    </select>
+     {{item.Time}}
+      
+    <input type="text" id="search_field" ng-model="search"  placeholder="Search Box"/>     
+     </div>  
+    </form>
+    <div id="loader" style="display:none">       
+    </div>    
+    <table id="firstdashboardtable" class="table table-stripped fixed_headers" style="padding:2px">
+        <thead>
+            <tr>
+                <th>
+                    Sr No.
+                </th>
+                <th style="text-align: left">
+                    Request Type
+                </th>
+                <th>
+                   Request at UI
+                </th>
+                <th></th>
+                <th>
+                    Request at BLL
+                </th>
+                 <th></th>
+                <th>
+                    Request at ESB
+                </th>
+                <th></th>
+                 <th>
+                    Response at ESB
+                </th>
+                 <th></th>
+                 <th>
+                   Response at BLL
+                </th> 
+                 <th></th>
+                 <th>
+                    Response at UI
+                </th>  
+                                
+                
+                              
+                
+            </tr>
+        </thead>
+        <tbody ng-repeat="data in Response | orderBy:sortType:sortReverse | filter:search">
+            <tr ng-if="data.Response_UI/data.Request_UI * 100 <=100 || data.Response_UI==data.Request_UI">            
+                <td id="serial"></td>
+                <td style="text-align:left" >{{data.Request_Type}}</td>
+                <td ng-if="data.Response_UI/data.Request_UI * 100 > 97 && data.Response_UI/data.Request_UI * 100 <=100 || data.Response_UI==data.Request_UI" style="background-color:#008000;color:Yellow;font-weight:bold">{{data.Request_UI}}</td>                                
+                <td ng-if="data.Response_UI/data.Request_UI * 100 > 95 && data.Response_UI/data.Request_UI * 100 <=97" style="background-color:Orange;color:Yellow;font-weight:bold">{{data.Request_UI}}</td>                
+                <td ng-if="data.Response_UI/data.Request_UI * 100 <=95" style="background-color:Red;color:Yellow;font-weight:bold">{{data.Request_UI}}</td>                                
+                <td ng-if="data.Response_UI/data.Request_UI * 100 > 100">{{data.Request_UI}}</td>                                
+                <td><span class="glyphicon glyphicon-arrow-right"></span></td>                 
+                <td>{{data.Request_BLL}}</td>
+                <td><span class="glyphicon glyphicon-arrow-right"></span></td>
+                <td>{{data.Request_ESB}}</td>
+                <td><span class="glyphicon glyphicon-arrow-right"></span></td>
+                <td>{{data.Response_ESB}}</td> 
+                <td><span class="glyphicon glyphicon-arrow-right"></span></td>
+                <td>{{data.Response_BLL}}</td> 
+                <td><span class="glyphicon glyphicon-arrow-right"></span></td>
+                <td ng-if="data.Response_UI/data.Request_UI * 100 > 97 && data.Response_UI/data.Request_UI * 100 <=100 || data.Response_UI==data.Request_UI" style="background-color:#008000;color:Yellow;font-weight:bold">{{data.Response_UI}}</td>                
+                <td ng-if="data.Response_UI/data.Request_UI * 100 > 95 && data.Response_UI/data.Request_UI * 100 <=97" style="background-color:Orange;color:Yellow;font-weight:bold">{{data.Response_UI}}</td>
+                <td ng-if="data.Response_UI/data.Request_UI * 100 <=95" style="background-color:Red;color:Yellow;font-weight:bold">{{data.Response_UI}}</td>                                              
+                <td ng-if="data.Response_UI/data.Request_UI * 100 > 100">{{data.Response_UI}}</td>                                                                                                                                                                                                                                                                          
+            </tr>
+        </tbody>
+    </table>      
+</body>
+</html>

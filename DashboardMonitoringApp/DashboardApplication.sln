@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DashboardApplication", "DashboardApplication\DashboardApplication.csproj", "{C7B1C899-7555-4C7C-B639-BC37FF654A6E}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://10.15.0.72:8080/tfs/epds%20team
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = DashboardApplication\\DashboardApplication.csproj
+		SccProjectName1 = DashboardApplication
+		SccLocalPath1 = DashboardApplication
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C7B1C899-7555-4C7C-B639-BC37FF654A6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7B1C899-7555-4C7C-B639-BC37FF654A6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7B1C899-7555-4C7C-B639-BC37FF654A6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7B1C899-7555-4C7C-B639-BC37FF654A6E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

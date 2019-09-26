@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" data-ng-app="app">
+<head>
+    <title></title>
+    <link href="../../bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />   
+    <link href="../../Styles/DashBoard.css" rel="stylesheet" type="text/css" />
+
+    <script src="../../JS/jquery.js" type="text/javascript"></script>   
+    <script src="../../JS/Comman/angular.js" type="text/javascript"></script>    
+    <script src="../../JS/app.js" type="text/javascript"></script>
+    <script src="../../JS/main.js" type="text/javascript"></script>
+    <script src="../../JS/DashBoard/FifthDashBoard.js" type="text/javascript"></script>
+    <script src="../../bootstrap/dist/js/bootstrap.js" type="text/javascript"></script>   
+    
+    <style rel="stylesheet" type="text/css">
+        .glyphicon-arrow-right:before
+        {
+            content: "\e092";
+        }
+        #fifthdashboardtable
+        {
+            font-size: 12px;
+            counter-reset: serial-number;
+        }
+        
+        #fifthdashboardtable #serial:first-child:before
+        {
+            counter-increment: serial-number;
+            content: counter(serial-number);
+        }
+        .fixed_headers thead tr th, .fixed_headers tbody tr td
+        {
+            padding: 2px;
+            text-align: center;
+        }
+        
+        .fixed_headers thead
+        {
+            background-color: #6b668c;
+            color: #ffffff;
+        }
+        
+     
+    </style>
+</head>
+<body ng-controller="FifthDashBoardCtrl">
+
+    <form name="fifthdashBoard">
+    <input type="button" value="Sort" ng-click="Sorting()" />
+    <a href="FifthDashBoard.htm">Refresh</a>
+    <label>App ID :</label>
+      <select ng-model="appid">
+      <option value="">--Select--</option>
+      <option value="FINOMB">FINOMB</option>
+      <option value="FINOMER">FINOMER</option>
+      <option value="FINOMERNP">FINOMERNP</option>
+      <option value="FINOTLR">FINOTLR</option>
+      <option value="MB">MB</option>
+    </select>     
+
+     <!--<input list="appidlist" id="AppIdSelect"  ng-model="search"
+                    onmouseover="focus();" tabindex="1" autocomplete="off">
+                <datalist id="appidlist">
+                  <option ng-repeat="data in AppId" id=" {{data.appid}}" value="{{data.appid}}"> 
+                  </datalist>-->
+    <div style="float:right;margin-bottom:10px;margin-right:10px">
+
+     <label>Today :</label>
+    <input type="checkbox" id="chktoday" ng-model="today"  ng-change="chgtoday(today)"; style="padding-right: 10px;margin-right:10px"/>
+
+    <label>Start Time :</label>
+     <select ng-model="STime" ng-change="changedStart(STime)" 
+            data-ng-options="stime as stime.Time for stime in SelectTime">
+      <option value="">Start Time</option>
+    </select>
+     {{stime.Time}}
+
+     <label>End Time :</label>
+     <select ng-model="ETime" ng-change="changedEnd(ETime)" 
+            data-ng-options="etime as etime.Time for etime in SelectTime">
+      <option value="">End Time</option>
+    </select>
+     {{etime.Time}}
+
+   <!-- <select id="dtime" ng-model="Time" ng-change="changedValue(Time)" 
+            data-ng-options="item as item.Time for item in Option">
+      <option value="">Last 15 Minute</option>
+    </select>
+     {{item.Time}}-->
+      
+    <input type="text" id="search_field" ng-model="search"  placeholder="Search Box"/>     
+     </div>  
+    </form>
+    <div id="loader" style="display:none">       
+    </div>    
+    <table id="fifthdashboardtable" class="table table-stripped fixed_headers" style="padding:2px">
+        <thead>
+            <tr>
+                <th>
+                    Sr No.
+                </th>
+                 <th style="text-align: left">
+                    App ID
+                </th>
+                <th style="text-align: left">
+                    Transaction Type
+                </th>
+                <th>
+                   Initiated
+                </th>               
+                <th>
+                    Success
+                </th>                
+                <th>
+                    Failed
+                </th>   
+                <th>
+                Awaiting
+                </th>                                          
+            </tr>
+        </thead>
+        <tbody >        
+         <!--<tr ng-if="data.TransactionType!==null">  -->  
+                 <tr ng-repeat="data in resultValue=(Response | orderBy:sortType:sortReverse | filter:search | filter:appid)">                    
+             <!--<tr ng-repeat="data in Response  | orderBy:sortType:sortReverse | filter:search | filter:appid">-->
+                <td id="serial"></td>
+                <td style="text-align: left">{{data.appid}}</td>
+                <td style="text-align: left">{{data.TransactionType}}</td>
+                <td>{{data.Initiated}}</td>
+                <td>{{data.Success}}</td>         
+                <!--<td ng-if="data.TransactionType=='GEEIMPS' ||data.TransactionType=='GEENEFT' || data.TransactionType=='EZSPIMPS' ||data.TransactionType=='EZSPNEFT' || data.TransactionType=='BANKITIMPS' ||data.TransactionType=='BANKITNEFT' || data.TransactionType=='LEVIIMPS' ||data.TransactionType=='LEVINEFT' || data.TransactionType=='Prudential' || data.TransactionType=='INSTIMPS' ||data.TransactionType=='INSTNEFT' ||data.TransactionType=='EZYIMPS' ||data.TransactionType=='EZYNEFT' ||data.TransactionType=='APNIMPS' ||data.TransactionType=='APNNEFT' ||data.TransactionType=='EXIDE' || data.TransactionType=='EKO IMPS' ||data.TransactionType=='EKO NEFT' ||data.TransactionType=='ISRVU IMPS' ||data.TransactionType=='ISRVU NEFT' || data.TransactionType=='ICICI LOMBARD(Family Floater)' || data.TransactionType=='ICICI LOMBARD(Hospicash)' || data.TransactionType=='HDFC ERGO Tanstype' || data.TransactionType=='BillPay' || data.TransactionType=='Cash Collection' || data.TransactionType=='Cash-In' || data.TransactionType=='Pay To Mobile' || data.TransactionType=='PPI-Purchase' || data.TransactionType=='IMPS PPI'|| data.TransactionType=='Recharge' ">{{data.Failed}}</td>    -->
+                 <td ng-if ="(data.TransactionType=='NEFT' || data.TransactionType =='Bene verification' || data.TransactionType=='IMPS Walk-In') == false">{{data.Failed}}</td>        
+                 <td ng-if="data.TransactionType=='NEFT' || data.TransactionType=='Bene verification' || data.TransactionType=='IMPS Walk-In'">                 
+                 <a data-ng-click="GetFailedData(data.TransactionType,data.appid)" style="position:relative" data-toggle="collapse" data-target="#{{data.appid + data.TransactionType | spaceless}}">                       
+                        <label class="font-bold" style="cursor: pointer">{{data.Failed}}
+                        </label></a>                         
+                         <ul class="collapse" id="{{data.appid + data.TransactionType | spaceless}}">                         
+                        <li>
+                        <div class="row">                        
+                        <div class="col-md-6"> <label style="float:left;color:Blue">Bank Name</label></div>
+                        <div class="col-md-6" style="color:Blue"><label>Count</label></div>
+                        </div>
+                            <div ng-repeat="data in FailedResponse">                          
+                                <div class="row">                                
+                                    <div class="col-md-6">                                                                           
+                                            <label style="float:left">{{data.Bankname}}</label>                                                                                                                        
+                                    </div>  
+                                    <div class="col-md-6">                                                                                                                     
+                                            <label >{{data.Count}}</label>                                                                                  
+                                    </div>  
+                                    <br />                                
+                                </div>
+                             </div>                          
+                        </li>
+                    </ul>                                                  
+                    </td>
+                    <!--<td ng-if="data.TransactionType=='GEEIMPS' ||data.TransactionType=='GEENEFT' || data.TransactionType=='EZSPIMPS' ||data.TransactionType=='EZSPNEFT' || data.TransactionType=='BANKITIMPS' ||data.TransactionType=='BANKITNEFT' || data.TransactionType=='LEVIIMPS' ||data.TransactionType=='LEVINEFT' ||data.TransactionType=='Prudential' || data.TransactionType=='INSTIMPS' ||data.TransactionType=='INSTNEFT' ||data.TransactionType=='EZYIMPS' ||data.TransactionType=='EZYNEFT' ||data.TransactionType=='APNIMPS' ||data.TransactionType=='APNNEFT' || data.TransactionType=='EKO IMPS' ||data.TransactionType=='EKO NEFT' ||data.TransactionType=='ISRVU IMPS' ||data.TransactionType=='ISRVU NEFT' || data.TransactionType=='EXIDE' || data.TransactionType=='ICICI LOMBARD(Family Floater)' ||  data.TransactionType=='ICICI LOMBARD(Hospicash)' || data.TransactionType=='HDFC ERGO Tanstype' || data.TransactionType=='NEFT' || data.TransactionType=='BillPay' || data.TransactionType=='Cash Collection' || data.TransactionType=='Pay To Mobile' || data.TransactionType=='PPI-Purchase' || data.TransactionType=='Cash-In' || data.TransactionType=='IMPS PPI'|| data.TransactionType=='Recharge' ">{{data.Awaiting}}</td>-->                    
+                    <td ng-if ="(data.TransactionType =='Bene verification' || data.TransactionType=='IMPS Walk-In') == false">{{data.Awaiting}}</td>       
+                    <td ng-if="data.TransactionType=='Bene verification' || data.TransactionType=='IMPS Walk-In'"> 
+                    <a ng-click="GetAwaitingData(data.TransactionType,data.appid)" style="position:relative" data-toggle="collapse" data-target="#{{data.appid + data.TransactionType | spaceless}}1">                       
+                        <label class="font-bold" style="cursor: pointer" ng-bind="{{data.Awaiting}}"></label></a>  
+                        
+                         <ul class="collapse" id="{{data.appid + data.TransactionType | spaceless}}1">                         
+                        <li>
+                        <div class="row">                        
+                        <div class="col-md-6"> <label style="float:left;color:Blue">Bank Name</label></div>
+                        <div class="col-md-6" style="color:Blue"><label>Count</label></div>
+                        </div>
+                            <div ng-repeat="data in AwaitingResponse">                          
+                                <div class="row">                                
+                                    <div class="col-md-6">                                                                           
+                                            <label style="float:left">{{data.Bankname}}</label>                                                                                                                        
+                                    </div>  
+                                    <div class="col-md-6">                                                                                                                     
+                                            <label >{{data.Count}}</label>                                                                                  
+                                    </div>                                  
+                                </div>
+                           </div>                            
+                        </li>
+                    </ul>                 
+                    </td>                                                                                                                                                                                                                                                                                                     
+            </tr>  
+            <tr>
+            <td></td>
+            <td></td>
+          <!--  <td><b>All Total :</b></td>
+            <td><b>{{Initiated}}</b></td>
+            <td><b>{{Success}}</b></td>
+            <td><b>{{Failed}}</b></td>
+            <td><b>{{Awaiting}}</b></td>-->
+            <td><b>All Total :</b></td>
+            <td><b>{{resultValue | sumOfValue:'Initiated'}}</b></td>
+            <td><b>{{resultValue | sumOfValue:'Success'}}</b></td>
+            <td><b>{{resultValue | sumOfValue:'Failed'}}</b></td>
+            <td><b>{{resultValue | sumOfValue:'Awaiting'}}</b></td>
+            </tr>                      
+        </tbody>
+    </table> 
+</body>
+</html>

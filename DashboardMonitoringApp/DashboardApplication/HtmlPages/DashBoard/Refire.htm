@@ -1,0 +1,369 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html data-ng-app="app">
+<head>
+    <title></title>
+    <link href="../../bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="../../Datatable/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link href="../../Styles/DashBoard.css" rel="stylesheet" type="text/css" />
+    <script src="../../JS/jquery.js" type="text/javascript"></script>
+    <script src="../../Datatable/jquery-ui-1.11.4.js" type="text/javascript"></script>
+    <script src="../../JS/Comman/angular.js" type="text/javascript"></script>
+    <script src="../../JS/app.js" type="text/javascript"></script>
+    <script src="../../JS/main.js" type="text/javascript"></script>
+    <script src="../../JS/DashBoard/RefireCtrl.js" type="text/javascript"></script>
+    <style rel="stylesheet" type="text/css">
+        #refiredashboard
+        {
+            font-size: 12px;
+            counter-reset: serial-number;
+        }
+        
+        #refiredashboard #serial:first-child:before
+        {
+            counter-increment: serial-number;
+            content: counter(serial-number);
+        }
+        
+        .fixed_headers
+        {
+            width: 1180px;
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
+        .fixed_headers th
+        {
+            text-decoration: none;
+        }
+        .fixed_headers th, .fixed_headers td
+        {
+            padding: 2px;
+            text-align: center;
+        }
+        .fixed_headers td:nth-child(1), .fixed_headers th:nth-child(1)
+        {
+            min-width: 40px;
+        }
+        .fixed_headers td:nth-child(2), .fixed_headers th:nth-child(2)
+        {
+            min-width: 200px;
+        }
+        .fixed_headers td:nth-child(3), .fixed_headers th:nth-child(3)
+        {
+            min-width: 100px;
+        }
+        .fixed_headers td:nth-child(4), .fixed_headers th:nth-child(4)
+        {
+            min-width: 90px;
+        }
+        .fixed_headers td:nth-child(5), .fixed_headers th:nth-child(5)
+        {
+            min-width: 110px;
+        }
+        .fixed_headers td:nth-child(6), .fixed_headers th:nth-child(6)
+        {
+            min-width: 125px;
+        }
+        .fixed_headers td:nth-child(7), .fixed_headers th:nth-child(7)
+        {
+            min-width: 100px;
+        }
+        .fixed_headers td:nth-child(8), .fixed_headers th:nth-child(8)
+        {
+            min-width: 85px;
+        }
+        .fixed_headers td:nth-child(9), .fixed_headers th:nth-child(9)
+        {
+            min-width: 150px;
+        }
+        .fixed_headers td:nth-child(10), .fixed_headers th:nth-child(10)
+        {
+            min-width: 160px;
+        }
+        .fixed_headers thead
+        {
+            background-color: #6b668c;
+            color: #fdfdfd;
+        }
+        .fixed_headers thead tr
+        {
+            display: block;
+            position: relative;
+        }
+        .fixed_headers tbody
+        {
+            display: block;
+            overflow: auto;
+            width: 100%;
+            height: 300px;
+        }
+        .fixed_headers tbody tr:nth-child(even)
+        {
+            background-color: #DCDCDC;
+        }
+        
+        
+        .fixed_headers1
+        {
+            width: 1180px;
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
+        .fixed_headers1 th
+        {
+            text-decoration: none;
+        }
+        .fixed_headers1 th, .fixed_headers1 td
+        {
+            padding: 2px;
+            text-align: center;
+        }
+        .fixed_headers1 td:nth-child(1), .fixed_headers1 th:nth-child(1)
+        {
+            min-width: 40px;
+        }
+        .fixed_headers1 td:nth-child(2), .fixed_headers1 th:nth-child(2)
+        {
+            min-width: 90px;
+        }
+        .fixed_headers1 td:nth-child(3), .fixed_headers1 th:nth-child(3)
+        {
+            min-width: 130px;
+        }
+        .fixed_headers1 td:nth-child(4), .fixed_headers1 th:nth-child(4)
+        {
+            min-width: 100px;
+        }
+        .fixed_headers1 td:nth-child(5), .fixed_headers1 th:nth-child(5)
+        {
+            min-width: 100px;
+        }
+        .fixed_headers1 td:nth-child(6), .fixed_headers1 th:nth-child(6)
+        {
+            min-width: 100px;
+        }
+        .fixed_headers1 td:nth-child(7), .fixed_headers1 th:nth-child(7)
+        {
+            min-width: 100px;
+        }
+        .fixed_headers1 td:nth-child(8), .fixed_headers1 th:nth-child(8)
+        {
+            min-width: 100px;
+        }
+        .fixed_headers1 thead
+        {
+            background-color: #6b668c;
+            color: #fdfdfd;
+        }
+        .fixed_headers1 thead tr
+        {
+            display: block;
+            position: relative;
+        }
+        .fixed_headers1 tbody
+        {
+            display: block;
+            overflow: auto;
+            width: 100%;
+            height: 200px;
+        }
+        .fixed_headers1 tbody tr:nth-child(even)
+        {
+            background-color: #DCDCDC;
+        }
+        
+        
+        .old_ie_wrapper
+        {
+            height: 300px;
+            width: 1000px;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        .old_ie_wrapper tbody
+        {
+            height: auto;
+        }
+    </style>
+</head>
+<div style="width: 95%; margin: 0px auto;">
+    <form name="refireform">
+    <input type="button" value="Sort" ng-click="Sorting()" />
+    <a href="Refire.htm">Refresh</a>
+    <div style="float: right; margin-bottom: 10px; margin-right: 10px">
+        <b>From :</b>
+        <input ng-model="Fromdate" placeholder="DD/MM/YYYY" type="text" id="dtfromdate" ng-change="focusOnFromDate()"
+            class="Fromdate" ng-blur="CheckFromDatevalidation()" tabindex="1" autocomplete="off"
+            onkeyup="var v = this.value;if (v.match(/^\d{2}$/) !== null) {this.value = v + '/';} else if (v.match(/^\d{2}\/\d{2}$/) !== null) {this.value = v + '/';}"
+            maxlength="10" required />
+        <b>To :</b>
+        <input ng-model="Todate" placeholder="DD/MM/YYYY" type="text" id="dttodate" ng-change="focusOnToDate()"
+            class="Todate" ng-blur="CheckToDatevalidation()" tabindex="1" autocomplete="off"
+            onkeyup="var v = this.value;if (v.match(/^\d{2}$/) !== null) {this.value = v + '/';} else if (v.match(/^\d{2}\/\d{2}$/) !== null) {this.value = v + '/';}"
+            maxlength="10" ng-disabled="toDateDisable" required />
+        <button id="btnsubmit" ng-click="fetchdata()">
+            Search</button>
+        <input type="text" id="search_field" ng-model="search" placeholder="Search Box" />
+    </div>
+    </form>
+    <br />
+    <body ng-controller="RefireCtrl">
+        <div id="loader" style="display: none">
+        </div>
+        <b>Summary :</b>
+        <table id="refiredashboard" class="fixed_headers1">
+            <thead>
+                <tr>
+                    <th colspan="2">
+                        Sr No.
+                    </th>
+                    <th style="text-align: left">
+                        AppId
+                    </th>
+                    <th style="text-align: left">
+                        PCODE
+                    </th>
+                    <th>
+                        Pending
+                    </th>
+                    <th>
+                        Success
+                    </th>
+                    <th>
+                        Already Process
+                    </th>
+                    <th>
+                        Retried
+                    </th>
+                    <th>
+                        Count
+                    </th>
+                </tr>
+            </thead>
+            <tr ng-repeat="data in resultValue=(Response1 | filter:search)">
+                <td id="serial">
+                </td>
+                <td style="text-align: left">
+                    {{data.appId}}
+                </td>
+                <td style="text-align: left">
+                    {{data.PCODE}}
+                </td>
+                <td>
+                    {{data.Pending}}
+                </td>
+                <td>
+                    {{data.Success}}
+                </td>
+                <td>
+                    {{data.AlreadyProcess}}
+                </td>
+                <td>
+                    {{data.Retried}}
+                </td>
+                <td>
+                    {{data.Total}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                    <b>All Total :</b>
+                </td>
+                <td>
+                    <b>{{resultValue | sumOfValue:'Pending'}}</b>
+                </td>
+                <td>
+                    <b>{{resultValue | sumOfValue:'Success'}}</b>
+                </td>
+                <td>
+                    <b>{{resultValue | sumOfValue:'AlreadyProcess'}}</b>
+                </td>
+                <td>
+                    <b>{{resultValue | sumOfValue:'Retried'}}</b>
+                </td>
+                <td>
+                    <b>{{resultValue | sumOfValue:'Total'}}</b>
+                </td>
+            </tr>
+        </table>
+        <b>Detail :</b>
+        <table id="refiredashboard" class="fixed_headers">
+            <thead>
+                <tr>
+                    <th colspan="2">
+                        Sr No.
+                    </th>
+                    <th>
+                        Corelation_ID
+                    </th>
+                    <th style="text-align: left">
+                        AppId
+                    </th>
+                    <th>
+                        UserId
+                    </th>
+                    <th>
+                        Trace
+                    </th>
+                    <th>
+                        PCODE
+                    </th>
+                    <th>
+                        ResponseCode
+                    </th>
+                    <th>
+                        CostCenter
+                    </th>
+                    <!--<th>
+                        GL_AccountNo
+                    </th>-->
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        DateTime
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="data in Response | orderBy:sortType:sortReverse | filter:search">
+                    <td id="serial">
+                    </td>
+                    <td>
+                        {{data.X_Corelation_Id}}
+                    </td>
+                    <td style="text-align: left">
+                        {{data.appId}}
+                    </td>
+                    <td>
+                        {{data.UserId}}
+                    </td>
+                    <td>
+                        {{data.Trace}}
+                    </td>
+                    <td>
+                        {{data.PCODE}}
+                    </td>
+                    <td>
+                        {{data.ResponseCode}}
+                    </td>
+                    <td>
+                        {{data.CostCenter}}
+                    </td>
+                    <!-- <td>
+                        {{data.GL_AccountNo}}
+                    </td>-->
+                    <td>
+                        {{data.Status}}
+                    </td>
+                    <td>
+                        {{data.Logdatetime}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

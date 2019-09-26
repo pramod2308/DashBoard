@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html data-ng-app="app">
+<head>
+    <title></title>
+    <link href="../../bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />      
+    <link href="../../Styles/DashBoard.css" rel="stylesheet" type="text/css" /> 
+
+    <script src="../../JS/jquery.js" type="text/javascript"></script>   
+    <script src="../../JS/Comman/angular.js" type="text/javascript"></script>
+    <script src="../../JS/app.js" type="text/javascript"></script>
+    <script src="../../JS/main.js" type="text/javascript"></script>    
+    <script src="../../JS/DashBoard/FourtDashBoard.js" type="text/javascript"></script>
+    
+         <style rel="stylesheet" type="text/css">       
+        #fourtdashboard
+        {
+            font-size: 12px;
+            counter-reset: serial-number;
+        }
+        
+        #fourtdashboard #serial:first-child:before
+        {
+            counter-increment: serial-number;
+            content: counter(serial-number);
+        }
+        
+         .fixed_headers
+        {
+            width: 1180px;
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
+        .fixed_headers th
+        {
+            text-decoration: none;
+        }
+        .fixed_headers th, .fixed_headers td
+        {
+            padding: 2px;
+            text-align: center;
+        }
+        .fixed_headers td:nth-child(1), .fixed_headers th:nth-child(1)
+        {
+            min-width: 40px;
+        }
+        .fixed_headers td:nth-child(2), .fixed_headers th:nth-child(2)
+        {
+            min-width: 205px;
+        }
+        .fixed_headers td:nth-child(3), .fixed_headers th:nth-child(3)
+        {
+            min-width: 205px;
+        }
+         .fixed_headers td:nth-child(4), .fixed_headers th:nth-child(4)
+        {
+            min-width: 95px;
+        }
+         .fixed_headers td:nth-child(5), .fixed_headers th:nth-child(5)
+        {
+            min-width: 270px;
+        }       
+          .fixed_headers td:nth-child(6), .fixed_headers th:nth-child(6)
+        {
+            min-width: 50px;
+        }    
+          .fixed_headers td:nth-child(7), .fixed_headers th:nth-child(7)
+        {
+            min-width: 150px;
+        } 
+          .fixed_headers td:nth-child(8), .fixed_headers th:nth-child(8)
+        {
+            min-width: 150px;
+        } 
+        .fixed_headers thead
+        {
+            background-color: #6b668c;
+            color: #fdfdfd;
+        }
+        .fixed_headers thead tr
+        {
+            display: block;
+            position: relative;
+        }
+        .fixed_headers tbody
+        {
+            display: block;
+            overflow: auto;
+            width: 100%;
+            height: 400px;
+        }
+        .fixed_headers tbody tr:nth-child(even)
+        {
+            background-color: #DCDCDC;
+        }
+        .old_ie_wrapper
+        {
+            height: 300px;
+            width: 1000px;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        .old_ie_wrapper tbody
+        {
+            height: auto;
+        }                
+    </style>       
+</head>
+<div style="width:95%;margin:0px auto;">
+<form name="fourthdashBoard">
+    <input type="button" value="Sort" ng-click="Sorting()" />
+    <a href="FourtDashBoard.html">Refresh</a>
+
+    <div style="float:right;margin-bottom:10px;margin-right:10px">
+    <select ng-model="Time" ng-change="changedValue(Time)" 
+            data-ng-options="item as item.Time for item in Option">
+      <option value="">Last 2 Minute</option>
+    </select>
+     {{item.Time}}
+      
+    <input type="text" id="search_field" ng-model="search"  placeholder="Search Box"/>     
+     </div>  
+    </form>
+<br/>
+<body ng-controller="FourtDashBoard">   
+    <div id="loader" style="display:none">       
+    </div>    
+    <table id="fourtdashboard" class="fixed_headers">
+        <thead>
+            <tr>
+                <th>
+                    Sr No.
+                </th>
+                 <th>
+                Corelation_ID
+                </th>
+                <th style="text-align: left">
+                    Request Type
+                </th>                            
+                <th>
+                   Layer Name
+                </th>               
+                <th style="text-align:left">
+                   Response Message
+                </th>                
+                <th>
+                   Count
+                </th>
+                 <th>
+                    Node_IP_Address
+                </th>  
+                 <th>
+                    DateTime
+                </th>                  
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="data in Response | orderBy:sortType:sortReverse | filter:search">            
+                <td id="serial"></td>
+                <td style="text-align: left">{{data.Corelation_Request}}</td>
+                <td style="text-align: left">{{data.Request_Type}}</td>                     
+                <td>{{data.Layer_Name}}</td>               
+                <td style="text-align:left">{{data.Response_Message}}</td>                                               
+                <td>{{data.Count}}</td>                   
+                <td>{{data.Node_IP_Address}}</td>
+                <td>{{data.RequestOut}}</td>                                                                                                                                                                                         
+            </tr>
+        </tbody>
+    </table> 
+    </div>     
+</body>
+</html>

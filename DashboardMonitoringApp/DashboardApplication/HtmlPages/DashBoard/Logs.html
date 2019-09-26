@@ -1,0 +1,225 @@
+﻿<html data-ng-app="app">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="../../JS/jquery.js" type="text/javascript"></script>
+    <script src="../../JS/Comman/angular.js" type="text/javascript"></script>
+    <script src="../../JS/app.js" type="text/javascript"></script>
+    <script src="../../JS/main.js" type="text/javascript"></script>
+    <link href="../../bootstrap/dist/css/Logs.css" rel="stylesheet" type="text/css" />
+    <script src="../../JS/DashBoard/Logs.js" type="text/javascript"></script>
+    <script src="../../bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+    <link href="../../Styles/DashBoard.css" rel="stylesheet" type="text/css" /> 
+</head>
+<body>
+    <div ng-controller="LogCtrl">
+        <div class="container-fluid">
+            <form name="form1">
+            <div class="row ">
+                <div class="col-sm-10 ">
+                    <input type="text" style="width: 300px; margin-top: 5px" placeholder="Enter ID" ng-model="RequestId"
+                        required />
+                    <input type="Submit" value="TblLog" ng-click="Logss()" ng-disabled="form1.$invalid" />
+                    <input type="Submit" value="CorelationLog" ng-click="Corelation()" ng-disabled="form1.$invalid" />
+                </div>
+            </div>
+            </form>
+            <div id="loader" style="display: none">
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-sm-12 " ng-show="Logs">
+                    <table class="table table-striped abc" style="height: 450px">
+                        <thead>
+                            <tr>
+                                <th>
+                                    ID
+                                </th>
+                                <th>
+                                    RequestID
+                                </th>
+                                <th>
+                                    TokenID
+                                </th>
+                                <th>
+                                    UserID
+                                </th>
+                                <th>
+                                    TellerID
+                                </th>
+                                <th>
+                                    SessionID
+                                </th>
+                                <th>
+                                    MethodID
+                                </th>
+                                <th style="text-align: left">
+                                    Module
+                                </th>
+                                <th style="text-align: left">
+                                    Message
+                                </th>
+                                <th>
+                                    PriorityID
+                                </th>
+                                <th>
+                                    CreatedDate
+                                </th>
+                                <th>
+                                    MobileNo
+                                </th>
+                                <th>
+                                    Method
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in LogResponse">
+                                <td>
+                                    {{data.ID}}
+                                </td>
+                                <td>
+                                    {{data.RequestID}}
+                                </td>
+                                <td>
+                                    {{data.TokenID}}
+                                </td>
+                                <td>
+                                    {{data.UserID}}
+                                </td>
+                                <td>
+                                    {{data.TellerID}}
+                                </td>
+                                <td>
+                                    {{data.SessionID}}
+                                </td>
+                                <td>
+                                    {{data.Form}}
+                                </td>
+                                <td style="text-align: left">
+                                    {{data.Module}}
+                                </td>
+                                <td style="text-align: left">
+                                    {{data.Message}}
+                                </td>
+                                <td>
+                                    {{data.PriorityID}}
+                                </td>
+                                <td>
+                                    {{data.CreatedDate}}
+                                </td>
+                                <td>
+                                    {{data.MobileNo}}
+                                </td>
+                                <td>
+                                    {{data.MethodId}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-2">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12" ng-show="CorTable">
+                    <table class="table table-striped abc" style="height: 450px">
+                        <thead>
+                            <tr>
+                                <th>
+                                    ID
+                                </th>
+                                <th>
+                                    Method_ID
+                                </th>
+                                <th>
+                                    Layer_ID
+                                </th>
+                                <th>
+                                    Request_Flag
+                                </th>
+                                <th>
+                                    Response_Flag
+                                </th>
+                                <th>
+                                    Corelation_Request
+                                </th>
+                                <th>
+                                    Corelation_Session
+                                </th>
+                                <th>
+                                    Node_IP_Address
+                                </th>
+                                <th>
+                                    RequestIn
+                                </th>
+                                <th>
+                                    RequestOut
+                                </th>
+                                <th>
+                                    Response_Message
+                                </th>
+                                <th>
+                                    Status_Code
+                                </th>
+                                <th>
+                                    Service_ID
+                                </th>
+                                <th>
+                                    Request_Type
+                                </th>
+                            </tr>
+                            <tr ng-repeat="data in CorelationResponse">
+                                <td>
+                                    {{data.ID}}
+                                </td>
+                                <td>
+                                    {{data.Method_ID}}
+                                </td>
+                                <td>
+                                    {{data.Layer_ID}}
+                                </td>
+                                <td>
+                                    {{data.Request_Flag}}
+                                </td>
+                                <td>
+                                    {{data.Response_Flag}}
+                                </td>
+                                <td>
+                                    {{data.Corelation_Request}}
+                                </td>
+                                <td>
+                                    {{data.Corelation_Session}}
+                                </td>
+                                <td>
+                                    {{data.Node_IP_Address}}
+                                </td>
+                                <td>
+                                    {{data.RequestIn}}
+                                </td>
+                                <td>
+                                    {{data.RequestOut}}
+                                </td>
+                                <td>
+                                    {{data.Response_Message}}
+                                </td>
+                                <td>
+                                    {{data.Status_Code}}
+                                </td>
+                                <td>
+                                    {{data.Service_ID}}
+                                </td>
+                                <td>
+                                    {{data.Request_Type}}
+                                </td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

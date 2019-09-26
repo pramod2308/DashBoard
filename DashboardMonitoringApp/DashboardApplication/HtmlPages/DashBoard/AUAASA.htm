@@ -1,0 +1,353 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" data-ng-app="app">
+<head>
+    <title></title>
+    <link href="../../bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="../../Datatable/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link href="../../Styles/DashBoard.css" rel="stylesheet" type="text/css" />
+    <script src="../../JS/jquery.js" type="text/javascript"></script>
+    <script src="../../Datatable/jquery-ui-1.11.4.js" type="text/javascript"></script>
+    <script src="../../JS/Comman/angular.js" type="text/javascript"></script>
+    <script src="../../JS/app.js" type="text/javascript"></script>
+    <script src="../../JS/main.js" type="text/javascript"></script>
+    <script src="../../JS/DashBoard/AUAASACtrl.js" type="text/javascript"></script>
+    <script src="../../bootstrap/dist/js/bootstrap.js" type="text/javascript"></script>
+    <style rel="stylesheet" type="text/css">
+        #auaasadashboardtable
+        {
+            font-size: 12px;
+            counter-reset: serial-number;
+        }
+        
+        #auaasadashboardtable td:first-child:before
+        {
+            counter-increment: serial-number;
+            content: counter(serial-number);
+        }
+        
+        .fixed_headers
+        {
+            width: 1520px;
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
+        .fixed_headers th
+        {
+            text-decoration: none;
+        }
+        .fixed_headers th, .fixed_headers td
+        {
+            padding: 2px;
+            text-align: center;
+        }
+        .fixed_headers td:nth-child(1), .fixed_headers th:nth-child(1)
+        {
+            min-width: 45px;
+        }
+        .fixed_headers td:nth-child(2), .fixed_headers th:nth-child(2)
+        {
+            min-width: 75px;
+        }
+        .fixed_headers td:nth-child(3), .fixed_headers th:nth-child(3)
+        {
+            min-width: 70px;
+        }
+        .fixed_headers td:nth-child(4), .fixed_headers th:nth-child(4)
+        {
+            min-width: 95px;
+        }
+        .fixed_headers td:nth-child(5), .fixed_headers th:nth-child(5)
+        {
+            min-width: 90px;
+        }
+        .fixed_headers td:nth-child(6), .fixed_headers th:nth-child(6)
+        {
+            min-width: 90px;
+        }
+        .fixed_headers td:nth-child(7), .fixed_headers th:nth-child(7)
+        {
+            min-width: 130px;
+        }
+        .fixed_headers td:nth-child(8), .fixed_headers th:nth-child(8)
+        {
+            min-width: 75px;
+        }
+        .fixed_headers td:nth-child(9), .fixed_headers th:nth-child(9)
+        {
+            min-width: 75px;
+        }
+        .fixed_headers td:nth-child(10), .fixed_headers th:nth-child(10)
+        {
+            min-width: 115px;
+        }
+        .fixed_headers td:nth-child(11), .fixed_headers th:nth-child(11)
+        {
+            min-width: 125px;
+        }
+        .fixed_headers td:nth-child(12), .fixed_headers th:nth-child(12)
+        {
+            min-width: 220px;
+        }
+        .fixed_headers td:nth-child(13), .fixed_headers th:nth-child(13)
+        {
+            min-width: 160px;
+        }
+        .fixed_headers td:nth-child(14), .fixed_headers th:nth-child(14)
+        {
+            min-width: 150px;
+        }
+        .fixed_headers thead
+        {
+            background-color: #6b668c;
+            color: #fdfdfd;
+        }
+        .fixed_headers thead tr
+        {
+            display: block;
+            position: relative;
+        }
+        .fixed_headers tbody
+        {
+            display: block;
+            overflow: auto;
+            width: 100%;
+            height: 500px;
+        }
+        .fixed_headers tbody tr:nth-child(even)
+        {
+            background-color: #DCDCDC;
+        }
+        .old_ie_wrapper
+        {
+            height: 300px;
+            width: 1000px;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        .old_ie_wrapper tbody
+        {
+            height: auto;
+        }
+    </style>
+</head>
+<body ng-controller="AUAASACtrl">
+    <form name="AUAASAdashBoard">
+    <input type="button" value="Sort" ng-click="Sorting()" />
+    <a href="AUAASA.htm">Refresh</a>
+    <div style="float: right; margin-bottom: 10px; margin-right: 10px">
+        <select ng-model="Time" ng-change="changedValue(Time)" data-ng-options="item as item.Time for item in Option">
+            <option value="">Last 2 Minute</option>
+        </select>
+        {{item.Time}}
+        <input type="text" id="search_field" ng-model="search" placeholder="Search Box" />
+    </div>
+    </form>
+    <div id="loader" style="display: none">
+    </div>
+    <table id="auaasadashboardtable" class="fixed_headers">
+        <thead>
+            <tr>
+                <th>
+                    Sr No.
+                </th>
+                <th>
+                    InstanceID
+                </th>
+                <th>
+                    Txn_Type
+                </th>
+                <th>
+                    SuccessCount
+                </th>
+                <th>
+                    FailureCount
+                </th>
+                <th>
+                    TimeoutCount
+                </th>
+                <th>
+                    ADV_MapperId_Blank
+                </th>
+                <th>
+                    TotalCount
+                </th>
+                <th>
+                    Error_Code
+                </th>
+                <th>
+                    Max_Error_Count
+                </th>
+                <th>
+                    Failure_Percent
+                </th>
+                <th>
+                    Error_Desc
+                </th>
+                <th>
+                    FirstTxnTime
+                </th>
+                <th>
+                    LastTxnTime
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="data in Response | orderBy:sortType:sortReverse | filter:search">
+                <td>
+                </td>
+                <td>
+                    {{data.Instance_Id}}
+                </td>
+                <td>
+                    {{data.TXN_Type}}
+                </td>
+                <td>
+                    {{data.SuccessCount}}
+                </td>
+                <td>
+                    {{data.FailureCount}}
+                </td>
+                <td ng-if="data.TimeoutCount >= 0 && data.TimeoutCount <= 5 " style="background-color: #008000;
+                    color: Yellow; font-weight: bold">
+                    {{data.TimeoutCount}}
+                </td>
+                <td ng-if="data.TimeoutCount > 5 && data.TimeoutCount <= 10 " style="background-color: Orange;
+                    color: Yellow; font-weight: bold">
+                    {{data.TimeoutCount}}
+                </td>
+                <td ng-if="data.TimeoutCount > 10" style="background-color: Red; color: Yellow;
+                    font-weight: bold">
+                    {{data.TimeoutCount}}
+                </td>
+                <td ng-if="data.ADV_MapperId_Blank >= 0 && data.ADV_MapperId_Blank <= 5 " style="background-color: #008000;
+                    color: Yellow; font-weight: bold">
+                    {{data.ADV_MapperId_Blank}}
+                </td>
+                <td ng-if="data.ADV_MapperId_Blank > 5 && data.ADV_MapperId_Blank <= 10 " style="background-color: Orange;
+                    color: Yellow; font-weight: bold">
+                    {{data.ADV_MapperId_Blank}}
+                </td>
+                <td ng-if="data.ADV_MapperId_Blank > 10" style="background-color: Red; color: Yellow;
+                    font-weight: bold">
+                    {{data.ADV_MapperId_Blank}}
+                </td>
+                <td>
+                    {{data.TotalCount}}
+                </td>
+                <td>
+                    <a data-ng-click="GetDetail(data.Instance_Id,data.Authres_err,data.First_txn_time)"
+                        style="position: relative" data-toggle="modal" data-target="#myModal">
+                        <label class="font-bold" style="cursor: pointer">
+                            {{data.Authres_err}}
+                        </label>
+                    </a>
+                </td>
+                <td>
+                    {{data.maxError_cnt}}
+                </td>
+                <td ng-if="data.Authres_err != 'K-955' && data.Authres_err != 'K-999' && data.Authres_err != 'K-570' && data.Authres_err != '570' && data.Authres_err != '930' && data.Authres_err != '931' && data.Authres_err != '932' && data.Authres_err != '933' && data.Authres_err != '934' && data.Authres_err != '935' && data.Authres_err != '936' && data.Authres_err != '937' && data.Authres_err != '938' && data.Authres_err != '939' && data.Authres_err != '0' ">
+                 {{data.Fail_Request_Percent}}
+                </td>
+                <td ng-if="data.Fail_Request_Percent >= 0 && data.Fail_Request_Percent <= 5 && data.Authres_err == 'K-955' || data.Authres_err == 'K-999' || data.Authres_err == 'K-570' || data.Authres_err == '570' || data.Authres_err == '930' || data.Authres_err == '931' || data.Authres_err == '932' || data.Authres_err == '933' || data.Authres_err == '934' || data.Authres_err == '935' || data.Authres_err == '936' || data.Authres_err == '937' || data.Authres_err == '938' || data.Authres_err == '939' || data.Authres_err == '0' " style="background-color: #008000;
+                    color: Yellow; font-weight: bold">
+                    {{data.Fail_Request_Percent}}
+                </td>
+                <td ng-if="data.Fail_Request_Percent > 5 && data.Fail_Request_Percent <= 10 && data.Authres_err == 'K-955' || data.Authres_err == 'K-999' || data.Authres_err == 'K-570' || data.Authres_err == '570' || data.Authres_err == '930' || data.Authres_err == '931' || data.Authres_err == '932' || data.Authres_err == '933' || data.Authres_err == '934' || data.Authres_err == '935' || data.Authres_err == '936' || data.Authres_err == '937' || data.Authres_err == '938' || data.Authres_err == '939' || data.Authres_err == '0' " style="background-color: Orange;
+                    color: Yellow; font-weight: bold">
+                    {{data.Fail_Request_Percent}}
+                </td>
+                <td ng-if="data.Fail_Request_Percent > 10 && data.Authres_err == 'K-955' || data.Authres_err == 'K-999' || data.Authres_err == 'K-570' || data.Authres_err == '570' || data.Authres_err == '930' || data.Authres_err == '931' || data.Authres_err == '932' || data.Authres_err == '933' || data.Authres_err == '934' || data.Authres_err == '935' || data.Authres_err == '936' || data.Authres_err == '937' || data.Authres_err == '938' || data.Authres_err == '939' || data.Authres_err == '0' " style="background-color: Red; color: Yellow;
+                    font-weight: bold">
+                    {{data.Fail_Request_Percent}}
+                </td>
+                <td>
+                    {{data.Error_Desc}}
+                </td>
+                <td>
+                    {{data.First_txn_time}}
+                </td>
+                <td>
+                    {{data.Last_Txn_Time}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog"  style="width:100%;font-size:12px;">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        &times;</button>
+                    <h4 class="modal-title">
+                        Modal Header</h4>
+                </div>
+                <div class="modal-body" style="overflow-x:scroll">
+                    <table style="width:120%;">
+                        <thead>
+                            <tr>
+                                <th>
+                                    AuthRes_code
+                                </th>
+                                <th>
+                                    AuthRes_txn
+                                </th>
+                                <th>
+                                    AuthRes_err
+                                </th>
+                                <th>
+                                    AuthRes_ts
+                                </th>
+                                <th>
+                                    Log_Date
+                                </th>
+                                <th>
+                                    SessionID
+                                </th>
+                                <th>
+                                    EkycAuthRes_err
+                                </th>
+                               <!-- <th>
+                                    Mapper_ID
+                                </th>-->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in Response1">
+                                <td>
+                                    {{data.AuthRes_code}}
+                                </td>
+                                <td>
+                                    {{data.AuthRes_txn}}
+                                </td>
+                                <td>
+                                    {{data.AuthRes_err}}
+                                </td>
+                                <td>
+                                    {{data.AuthRes_ts}}
+                                </td>
+                                <td>
+                                    {{data.Log_Date}}
+                                </td>
+                                <td>
+                                    {{data.SessionID}}
+                                </td>
+                                <td>
+                                    {{data.EkycAuthRes_err}}
+                                </td>
+                              <!--  <td>
+                                    {{data.Mapper_ID}}
+                                </td>-->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>

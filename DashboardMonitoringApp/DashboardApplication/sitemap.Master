@@ -1,0 +1,84 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="sitemap.master.cs" Inherits="DashboardApplication.sitemap" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div class="page">
+        <div class="header" style="background-image: url(img/login_bg.png);">
+            <div class="title">
+                <h1>
+                    Monitoring DashBoard
+                </h1>
+            </div>
+            <div style="float: right; color: white; margin-top: 20px; margin-right: 40px;">
+                <asp:LinkButton ForeColor="White" ID="lnkLogout" OnClick="Logout" runat="server"
+                    Text="LOGOUT"></asp:LinkButton>
+            </div>
+            <div class="clear hideSkiplink">
+                <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false"
+                    IncludeStyleBlock="false" Orientation="Horizontal">
+                    <Items>
+                        <asp:MenuItem NavigateUrl="~/Firsttab.aspx" Text="Request IN/OUT" />
+                        <asp:MenuItem NavigateUrl="~/Secondtab.aspx" Text="Response Time" />
+                        <asp:MenuItem NavigateUrl="~/DashBoardStatusCod.aspx" Text="Network Exception" />
+                        <asp:MenuItem NavigateUrl="~/FourtdashBoard.aspx" Text="Failure Details" />
+                        <asp:MenuItem NavigateUrl="~/FifthDashBoard.aspx" Text="Transactions" />
+                        <asp:MenuItem NavigateUrl="~/ESBFailed_Awaiting.aspx" Text="Failed_Awaiting" />
+                        <asp:MenuItem NavigateUrl="~/ServiceLatency.aspx" Text="ServiceWiseLatency" />
+                        <asp:MenuItem NavigateUrl="~/NodeLatency.aspx" Text="NodeWiseLatency" />
+                        <asp:MenuItem NavigateUrl="~/MerchantTransaction.aspx" Text="Merchant Transaction" />
+                        <asp:MenuItem NavigateUrl="~/Logs.aspx" Text="Logs" />
+                        <asp:MenuItem NavigateUrl="~/ESBLatency1.aspx" Text="Zone DataFlow" />
+                        <asp:MenuItem NavigateUrl="~/ESBLatency2.aspx" Text="Zone Hits" />
+                        <asp:MenuItem NavigateUrl="~/IMPS.aspx" Text="IMPS OUTWARD" />
+                        <asp:MenuItem NavigateUrl="~/EKO.aspx" Text="EKO" />
+                        <asp:MenuItem NavigateUrl="~/EKO_Failed.aspx" Text="EKO Failed" />
+                        <asp:MenuItem NavigateUrl="~/EKOServerStatus.aspx" Text="EKO Server Status" />
+                        <asp:MenuItem NavigateUrl="~/CityCash.aspx" Text="City Cash" />
+                        <asp:MenuItem NavigateUrl="~/AEPSNew.aspx" Text="AEPS" />
+                        <asp:MenuItem NavigateUrl="~/AEPSFailed.aspx" Text="AEPS Failed" />
+                        <asp:MenuItem NavigateUrl="~/AEPSAPI.aspx" Text="AEPS API" />
+                        <asp:MenuItem NavigateUrl="~/AEPSISSUER.aspx" Text="AEPS ISSUER" />
+                        <asp:MenuItem NavigateUrl="~/Refire.aspx" Text="Refire" />
+                        <asp:MenuItem NavigateUrl="~/NotRefire.aspx" Text="Not Refire" />
+                        <asp:MenuItem NavigateUrl="~/CMSAPI.aspx" Text="CMS API" />
+                        <asp:MenuItem NavigateUrl="~/CashCollectionSummary.aspx" Text="CMS Summary" />
+                        <asp:MenuItem NavigateUrl="~/CMSFailed.aspx" Text="CMS Failed" />
+                        <asp:MenuItem NavigateUrl="~/RupayNew.aspx" Text="Rupay" />
+                        <asp:MenuItem NavigateUrl="~/DMS_Account_DashBoard.aspx" Text="DMS Account" />
+                        <asp:MenuItem NavigateUrl="~/DMSACCOpening.aspx" Text="DMS ACC Opening" />
+                        <asp:MenuItem NavigateUrl="~/DMSACCOpening2.aspx" Text="DMS ACC Opening 2" />
+                        <asp:MenuItem NavigateUrl="~/DMS_LENDING_DASHBOARD.aspx" Text="DMS Lending" />
+                        <asp:MenuItem NavigateUrl="~/AccountOpening.aspx" Text="Account Opening" />
+                        <%--                         <asp:MenuItem NavigateUrl="~/Rupay.aspx" Text="Rupay" />
+                         <asp:MenuItem NavigateUrl="~/AEPS.aspx" Text="AEPS" />--%>
+                        <%--  <asp:MenuItem NavigateUrl="~/ImpsSummary.aspx" Text="IMPS Summary" />      --%>
+                        <%--<asp:MenuItem NavigateUrl="~/HA_ESB_Latency.aspx" Text="HA_ESB_Latency" />                        
+                        <asp:MenuItem NavigateUrl="~/ESBLatencyReport.aspx" Text="ESB Response Time" />
+                        <asp:MenuItem NavigateUrl="~/ESBNodeWiseLatency.aspx" Text="ESBNodeLatency" />
+                        <asp:MenuItem NavigateUrl="~/ESBServiceWiseLatency.aspx" Text="ESBServiceLatency" />
+                        <asp:MenuItem NavigateUrl="~/ESB_Latency_DBInsertion.aspx" Text="ESB Latency Report" />--%>
+                        <asp:MenuItem NavigateUrl="~/Suryoday.aspx" Text="Suryoday" />
+                        <asp:MenuItem NavigateUrl="~/Passthrough.aspx" Text="Passthrough" />
+                        <asp:MenuItem NavigateUrl="~/AUAASA.aspx" Text="AUA" />
+                        <asp:MenuItem NavigateUrl="~/CacheFailureDetails.aspx" Text="Failure Response" />
+                        <asp:MenuItem NavigateUrl="~/CashBazaar.aspx" Text="COLA" />
+                    </Items>
+                </asp:Menu>
+            </div>
+        </div>
+        <div class="main">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </div>
+    </form>
+</body>
+</html>

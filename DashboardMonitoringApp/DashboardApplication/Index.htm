@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <title>Monitoring DashBoard</title>
+    <!--<link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />-->
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="bootstrap/dist/css/bootstrap-dialog.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/DashBoard.css" rel="stylesheet" type="text/css" />    
+    <link href="Styles/dragtable.css" rel="stylesheet" type="text/css" />
+</head>
+<body style="width:95%;margin:0px auto;">  
+ <nav class="navbar navbar-default navbar-static-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#"> Monitoring DashBoard</a>
+    </div>
+    <ul class="nav navbar-nav">
+		<li><a  ui-sref="First">Request IN/OUT</a></li>
+        <li><a  ui-sref="Second">Response Time</a></li>
+        <li><a  ui-sref="Third">Network Exception</a></li>
+        <li><a  ui-sref="Fourth">Failure Details</a></li>
+        <li><a  ui-sref="Fifth">Transactions</a></li>
+        <li><a  ui-sref="Sixth">Failed_Awaiting</a></li>
+        <li><a  ui-sref="Seventh">ServiceWiseLatency</a></li>
+        <li><a  ui-sref="Eighth">NodeWiseLatency</a></li>
+        <li><a  ui-sref="Ninth">Merchant Transaction</a></li>
+	</ul>    
+  </div>
+</nav>
+
+    <div class="app" id="app" ui-view style="height:500px">
+    </div>
+    <script src="JS/jquery.js" type="text/javascript"></script>
+    <script src="Datatable/jquery-ui-1.11.4.js" type="text/javascript"></script>
+    <script src="JS/jquery.dragtable.js" type="text/javascript"></script>
+    <script src="JS/Comman/angular.js" type="text/javascript"></script>
+    <script src="JS/angular-ui-router.js" type="text/javascript"></script>
+    <script src="JS/app.js" type="text/javascript"></script>    
+    <script src="../../JS/DashBoard/FirstDashBoardCtrl.js" type="text/javascript"></script> 
+     <script src="../../JS/DashBoard/SecondDashBoardCtrl.js" type="text/javascript"></script>     
+    <!--<script src="bootstrap/dist/js/bootstrap.js" type="text/javascript"></script>-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

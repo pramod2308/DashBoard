@@ -1,0 +1,342 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" data-ng-app="app">
+<head>
+    <title></title>
+    <link href="../../bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="../../Datatable/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link href="../../Styles/DashBoard.css" rel="stylesheet" type="text/css" />
+    <script src="../../JS/jquery.js" type="text/javascript"></script>
+    <script src="../../Datatable/jquery-ui-1.11.4.js" type="text/javascript"></script>
+    <script src="../../JS/Comman/angular.js" type="text/javascript"></script>
+    <script src="../../JS/app.js" type="text/javascript"></script>
+    <script src="../../JS/main.js" type="text/javascript"></script>
+    <script src="../../JS/DashBoard/SuryodayCtrl.js" type="text/javascript"></script>
+    <style rel="stylesheet" type="text/css">
+        #aepsdashboardtable
+        {
+            font-size: 12px;
+            counter-reset: serial-number;
+        }
+        
+        #aepsdashboardtable td:first-child:before
+        {
+            counter-increment: serial-number;
+            content: counter(serial-number);
+        }
+        
+        .fixed_headers
+        {
+            width: 2600px;
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
+        .fixed_headers th
+        {
+            text-decoration: none;
+        }
+        .fixed_headers th, .fixed_headers td
+        {
+            padding: 2px;
+            text-align: center;
+        }
+        .fixed_headers td:nth-child(1), .fixed_headers th:nth-child(1)
+        {
+            min-width: 50px;
+        }
+        .fixed_headers td:nth-child(2), .fixed_headers th:nth-child(2)
+        {
+            min-width: 210px;
+        }
+        .fixed_headers td:nth-child(3), .fixed_headers th:nth-child(3)
+        {
+            min-width: 120px;
+        }
+        .fixed_headers td:nth-child(4), .fixed_headers th:nth-child(4)
+        {
+            min-width: 120px;
+        }
+        .fixed_headers td:nth-child(5), .fixed_headers th:nth-child(5)
+        {
+            min-width: 120px;
+        }
+        .fixed_headers td:nth-child(6), .fixed_headers th:nth-child(6)
+        {
+            min-width: 120px;
+        }
+        .fixed_headers td:nth-child(7), .fixed_headers th:nth-child(7)
+        {
+            min-width: 120px;
+        }
+        .fixed_headers td:nth-child(8), .fixed_headers th:nth-child(8)
+        {
+            min-width: 130px;
+        }
+        .fixed_headers td:nth-child(9), .fixed_headers th:nth-child(9)
+        {
+            min-width: 140px;
+        }
+        .fixed_headers td:nth-child(10), .fixed_headers th:nth-child(10)
+        {
+            min-width: 140px;
+        }
+        .fixed_headers td:nth-child(11), .fixed_headers th:nth-child(11)
+        {
+            min-width: 140px;
+        }
+        .fixed_headers td:nth-child(12), .fixed_headers th:nth-child(12)
+        {
+            min-width: 140px;
+        }
+        .fixed_headers td:nth-child(13), .fixed_headers th:nth-child(13)
+        {
+            min-width: 140px;
+        }
+        .fixed_headers td:nth-child(14), .fixed_headers th:nth-child(14)
+        {
+            min-width: 185px;
+        }
+        .fixed_headers td:nth-child(15), .fixed_headers th:nth-child(15)
+        {
+            min-width: 140px;
+        }
+        .fixed_headers td:nth-child(16), .fixed_headers th:nth-child(16)
+        {
+            min-width: 140px;
+        }
+        .fixed_headers td:nth-child(17), .fixed_headers th:nth-child(17)
+        {
+            min-width: 140px;
+        }
+        .fixed_headers td:nth-child(18), .fixed_headers th:nth-child(18)
+        {
+            min-width: 140px;
+        }
+        .fixed_headers td:nth-child(19), .fixed_headers th:nth-child(19)
+        {
+            min-width: 140px;
+        }
+        .fixed_headers thead
+        {
+            background-color: #6b668c;
+            color: #fdfdfd;
+        }
+        .fixed_headers thead tr
+        {
+            display: block;
+            position: relative;
+        }
+        .fixed_headers tbody
+        {
+            display: block;
+            overflow: auto;
+            width: 100%;
+            height: 350px;
+        }
+        .fixed_headers tbody tr:nth-child(even)
+        {
+            background-color: #DCDCDC;
+        }
+        .old_ie_wrapper
+        {
+            height: 300px;
+            width: 1300px;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        .old_ie_wrapper tbody
+        {
+            height: auto;
+        }
+    </style>
+</head>
+<body ng-controller="SuryodayCtrl">
+    <div style="width: 95%; margin: 0px auto">
+        <form name="suryodaydashBoard" novalidate>
+        <input type="button" value="Sort" ng-click="Sorting()" />
+        <a href="Suryoday.htm">Refresh</a>
+        <div style="float: right; margin-right: 70px">
+            <b>From :</b>
+            <input ng-model="Fromdate" placeholder="DD/MM/YYYY" type="text" id="dtfromdate" ng-change="focusOnFromDate()"
+                class="Fromdate" ng-blur="CheckFromDatevalidation()" tabindex="1" autocomplete="off"
+                onkeyup="var v = this.value;if (v.match(/^\d{2}$/) !== null) {this.value = v + '/';} else if (v.match(/^\d{2}\/\d{2}$/) !== null) {this.value = v + '/';}"
+                maxlength="10" required />
+            <button ng-click="GetData()" value="GET">
+                Search</button>
+            <input type="text" id="search_field" ng-model="search" placeholder="Search Box" />
+        </div>
+        </form>
+        <div id="loader" style="display: none">
+        </div>
+        <hr style="height: 2px; color: Black" />
+        <div style="height: 100px;">
+            <table id="aepsdashboardtable" class="fixed_headers">
+                <thead>
+                    <tr>
+                        <th>
+                            Sr No.
+                        </th>
+                        <th>
+                            FileName
+                        </th>
+                        <th>
+                            Total No. Of Records
+                        </th>
+                        <th>
+                            Records Processed
+                        </th>
+                        <th>
+                            Duplicate Record
+                        </th>
+                        <th>
+                            Record Not Process
+                        </th>
+                        <th>
+                            Cif Created
+                        </th>
+                        <th>
+                            Cif Already Available
+                        </th>
+                        <th>
+                            Cif Creation Failed
+                        </th>
+                        <th>
+                            Acc Created
+                        </th>
+                        <th>
+                            Acc Already Available
+                        </th>
+                        <th>
+                            Acc Creation Failed
+                        </th>
+                        <th>
+                            Cif Extension Done
+                        </th>
+                        <th>
+                            Cif Extension Already Available
+                        </th>
+                        <th>
+                            Cif Extension Failed
+                        </th>
+                        <th>
+                            Fund Transfer Success
+                        </th>
+                         <th>
+                            Fund Transfer In Process
+                        </th>
+                        <th>
+                            Fund Transfer Pending For Process
+                        </th>
+                        <th>
+                            Fund Transfer Failed
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="data in Response | orderBy:sortType:sortReverse | filter:search">
+                        <td>
+                        </td>
+                        <td>
+                            {{data.File_Name}}
+                        </td>
+                        <td>
+                            {{data.Total_No_Of_Records}}
+                        </td>
+                        <td>
+                            {{data.Records_Processed}}
+                        </td>
+                        <td>
+                            {{data.Duplicate_Record}}
+                        </td>
+                        <td>
+                            {{data.Record_Not_Process}}
+                        </td>
+                        <td>
+                            {{data.Cif_Created}}
+                        </td>
+                        <td>
+                            {{data.Cif_Already_Available}}
+                        </td>
+                        <td>
+                            {{data.Cif_Creation_Failed}}
+                        </td>
+                        <td>
+                            {{data.Acc_Created}}
+                        </td>
+                        <td>
+                            {{data.Acc_Already_Available}}
+                        </td>
+                        <td>
+                            {{data.Acc_Creation_Failed}}
+                        </td>
+                        <td>
+                            {{data.Cif_Extension_Done}}
+                        </td>
+                        <td>
+                            {{data.Cif_Extension_Already_Available}}
+                        </td>
+                        <td>
+                            {{data.Cif_Extension_Failed}}
+                        </td>
+                        <td>
+                            {{data.Fund_Transfer_Success}}
+                        </td>
+                        <td>
+                            {{data.In_Process}}
+                        </td>
+                        <td>
+                            {{data.Pending_ForProcess}}
+                        </td>
+                        <td>
+                            {{data.Fund_Transfer_Failed}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <table id="aepsdashboardtable1" class="fixed_headers">
+                <thead>
+                    <tr>
+                        <th>
+                            Local Date Time
+                        </th>
+                        <th>
+                            Partner CIF Response
+                        </th>
+                        <th>
+                            Partner Account Response
+                        </th>
+                        <th>
+                            Remark
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="data in Response1 | orderBy:sortType:sortReverse | filter:search">
+                        <td>
+                        </td>
+                        <td>
+                            {{data.Local_Date_Time}}
+                        </td>
+                        <td>
+                            {{data.Partner_CIF_ResponseMessage}}
+                        </td>
+                        <td>
+                            {{data.Partner_Account_ResponseMessage}}
+                        </td>
+                        <td>
+                            {{data.Remark}}
+                        </td>
+                        <td>
+                            {{data.Status_Flag}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+D:\Mahesh V\TFS\DashboardMonitoringApp\DashboardApplication\bin\DashboardApplication.dll
+D:\Mahesh V\TFS\DashboardMonitoringApp\DashboardApplication\bin\DashboardApplication.pdb
+D:\Mahesh V\TFS\DashboardMonitoringApp\DashboardApplication\obj\Debug\DashboardApplication.dll
+D:\Mahesh V\TFS\DashboardMonitoringApp\DashboardApplication\obj\Debug\DashboardApplication.pdb
+D:\Mahesh V\TFS\DashboardMonitoringApp\DashboardApplication\obj\Debug\DashboardApplication.csprojResolveAssemblyReference.cache
+D:\Mahesh V\POC_DashBoard\DashboardMonitoringApp\DashboardApplication\bin\DashboardApplication.dll
+D:\Mahesh V\POC_DashBoard\DashboardMonitoringApp\DashboardApplication\bin\DashboardApplication.pdb
+D:\Mahesh V\POC_DashBoard\DashboardMonitoringApp\DashboardApplication\obj\Debug\DashboardApplication.dll
+D:\Mahesh V\POC_DashBoard\DashboardMonitoringApp\DashboardApplication\obj\Debug\DashboardApplication.pdb
+C:\Users\pramod.verma\Desktop\POC_DashBoard\DashboardMonitoringApp\DashboardApplication\bin\DashboardApplication.dll
+C:\Users\pramod.verma\Desktop\POC_DashBoard\DashboardMonitoringApp\DashboardApplication\bin\DashboardApplication.pdb
+C:\Users\pramod.verma\Desktop\POC_DashBoard\DashboardMonitoringApp\DashboardApplication\obj\Debug\DashboardApplication.csprojResolveAssemblyReference.cache
+C:\Users\pramod.verma\Desktop\POC_DashBoard\DashboardMonitoringApp\DashboardApplication\obj\Debug\DashboardApplication.dll
+C:\Users\pramod.verma\Desktop\POC_DashBoard\DashboardMonitoringApp\DashboardApplication\obj\Debug\DashboardApplication.pdb

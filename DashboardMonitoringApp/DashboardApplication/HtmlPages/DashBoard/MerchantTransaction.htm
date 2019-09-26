@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" data-ng-app="app">
+<head>
+    <title></title>    
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.2.714/styles/kendo.common.min.css"/>
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.2.714/styles/kendo.bootstrap.min.css"/>
+  
+    <link href="../../Datatable/jquery-ui.css" rel="stylesheet" type="text/css" />        
+    <link href="../../bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />    
+    <script src="../../JS/jquery.js" type="text/javascript"></script>
+    <script src="../../bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../../Datatable/jquery-ui-1.11.4.js" type="text/javascript"></script>
+    <script src="../../JS/Comman/angular.js" type="text/javascript"></script>
+    <script src="../../JS/app.js" type="text/javascript"></script>
+    <script src="../../JS/main.js" type="text/javascript"></script>
+    <script src="../../JS/DashBoard/MerchantTransaction.js" type="text/javascript"></script>          
+    <script src="../../Kendo/kendo.all.min.js" type="text/javascript"></script>
+    <link href="../../Styles/DashBoard.css" rel="stylesheet" type="text/css" />        
+</head>
+<body ng-controller="MerchantCtrl" class="code">
+    <form name="fifthdashBoard">    
+    <label>App ID :</label>
+      <select id="ddlappid">
+      <option value="">--Select--</option>
+      <option value="FINOMB">FINOMB</option>
+      <option value="FINOMER">FINOMER</option>
+      <option value="FINOTLR">FINOTLR</option>
+      <option value="MB">MB</option>
+    </select>   
+
+    <a href="MerchantTransaction.htm">Refresh</a>   
+     <input type="button" value="Export To CSV" ng-click="ExportToCSV()"/>
+
+    <input type="button" value="All Records" ng-click="GetAllrecords()"/> 
+    <input type="button" value="Cancel" ng-click="Cancel()"/>  
+
+    <div ng-show="mer" style="float:right;margin-bottom:10px;margin-right:10px">
+     
+     <label>Today :</label>
+    <input type="checkbox" id="chktoday" ng-model="today"  ng-change="chgtoday(today)"; style="padding-right: 10px;margin-right:10px"/>
+
+    <label>Start Time :</label>
+     <select ng-model="STime" ng-change="changedStart(STime)" 
+            data-ng-options="stime as stime.Time for stime in SelectTime">
+      <option value="">Start Time</option>
+    </select>
+     {{stime.Time}}
+
+     <label>End Time :</label>
+     <select ng-model="ETime" ng-change="changedEnd(ETime)" 
+            data-ng-options="etime as etime.Time for etime in SelectTime">
+      <option value="">End Time</option>
+    </select>
+     {{etime.Time}}  
+                     
+        <input  class="k-textbox" type="text" id="txtSearchString" placeholder="Search" />            
+
+    <!--<input type="text" id="search_field" ng-model="search"  placeholder="Search Box"/>-->     
+     </div>  
+    </form>
+    <div id="loader" style="display:none">       
+    </div>        
+    <div style="padding-top:20px">
+ <div id="MerchantData" ng-show="mer"></div>
+</div>
+    
+    <table id="Table1" ng-hide="mer" style="padding:2px"  class="table table-stripped fixed_headers">
+        <thead>
+            <tr>                               
+                <th style="text-align: left">
+                   TransactionType
+                </th>               
+                <th>
+                   Initiated
+                </th>               
+                <th>
+                    Success
+                </th>                
+                <th>
+                    Failed
+                </th>   
+                <th>
+                Awaiting
+                </th>   
+                 <th>
+                Amount
+                </th>                                          
+            </tr>
+        </thead>
+        <tbody>        
+         <tr ng-repeat="data in Response2">                                                      
+                <td style="text-align: left">{{data.TransactionType}}</td>             
+                <td>{{data.Initiated}}</td>
+                <td>{{data.Success}}</td>
+               <td ng-if="data.TransactionType=='BillPay' || data.TransactionType=='Cash Collection' || data.TransactionType=='Cash-In' || data.TransactionType=='Pay To Mobile' || data.TransactionType=='PPI-Purchase' || data.TransactionType=='IMPS PPI'|| data.TransactionType=='Recharge' ">{{data.Failed}}</td>    
+                            
+                 <td ng-if="data.TransactionType=='NEFT' || data.TransactionType=='Bene verification' || data.TransactionType=='IMPS Walk-In'">                 
+                 <a data-ng-click="GetFailedData(data.TransactionType,data.appid)" style="position:relative" data-toggle="collapse" data-target="#{{data.TransactionType | spaceless}}">                       
+                        <label class="font-bold" style="cursor: pointer">{{data.Failed}}
+                        </label></a>                         
+                         <ul class="collapse" id="{{data.TransactionType | spaceless}}">                         
+                        <li>
+                        <div class="row">                        
+                        <div class="col-md-6"> <label style="float:left;color:Blue">Bank Name</label></div>
+                        <div class="col-md-6" style="color:Blue"><label>Count</label></div>
+                        </div>
+                            <div ng-repeat="data in FailedResponse">                          
+                                <div class="row">                                
+                                    <div class="col-md-6">                                                                           
+                                            <label style="float:left">{{data.Bankname}}</label>                                                                                                                        
+                                    </div>  
+                                    <div class="col-md-6">                                                                                                                     
+                                            <label >{{data.Count}}</label>                                                                                  
+                                    </div>  
+                                    <br />                                
+                                </div>
+                             </div>                          
+                        </li>
+                    </ul>                                                  
+                    </td>   
+                    <td ng-if="data.TransactionType=='NEFT' || data.TransactionType=='BillPay' || data.TransactionType=='Cash Collection' || data.TransactionType=='Pay To Mobile' || data.TransactionType=='PPI-Purchase' || data.TransactionType=='Cash-In' || data.TransactionType=='IMPS PPI'|| data.TransactionType=='Recharge' ">{{data.Awaiting}}</td>       
+                    <td ng-if="data.TransactionType=='Bene verification' || data.TransactionType=='IMPS Walk-In'"> 
+                    <a ng-click="GetAwaitingData(data.TransactionType,data.appid)" style="position:relative" data-toggle="collapse" data-target="#{{data.TransactionType | spaceless}}1">                       
+                        <label class="font-bold" style="cursor: pointer" ng-bind="{{data.Awaiting}}"></label></a>  
+                        
+                         <ul class="collapse" id="{{data.TransactionType | spaceless}}1">                         
+                        <li>
+                        <div class="row">                        
+                        <div class="col-md-6"> <label style="float:left;color:Blue">Bank Name</label></div>
+                        <div class="col-md-6" style="color:Blue"><label>Count</label></div>
+                        </div>
+                            <div ng-repeat="data in AwaitingResponse">                          
+                                <div class="row">                                
+                                    <div class="col-md-6">                                                                           
+                                            <label style="float:left">{{data.Bankname}}</label>                                                                                                                        
+                                    </div>  
+                                    <div class="col-md-6">                                                                                                                     
+                                            <label >{{data.Count}}</label>                                                                                  
+                                    </div>                                  
+                                </div>
+                           </div>                            
+                        </li>
+                    </ul>                 
+                    </td>      
+                <td>{{data.Amount}}</td>
+            </tr>           
+        </tbody>
+    </table>     
+</body>
+</html>

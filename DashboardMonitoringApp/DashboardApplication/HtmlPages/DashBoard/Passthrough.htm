@@ -1,0 +1,289 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" data-ng-app="app">
+<head>
+    <title></title>
+    <link href="../../bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="../../Styles/DashBoard.css" rel="stylesheet" type="text/css" />
+    <script src="../../JS/jquery.js" type="text/javascript"></script>
+    <script src="../../JS/Comman/angular.js" type="text/javascript"></script>
+    <script src="../../JS/app.js" type="text/javascript"></script>
+    <script src="../../JS/main.js" type="text/javascript"></script>
+    <script src="../../JS/DashBoard/PassthroughCtrl.js" type="text/javascript"></script>
+    <style rel="stylesheet" type="text/css">
+        #aepsdashboardtable
+        {
+            font-size: 12px;
+            counter-reset: serial-number;
+        }
+        
+        #aepsdashboardtable td:first-child:before
+        {
+            counter-increment: serial-number;
+            content: counter(serial-number);
+        }
+        
+        .fixed_headers
+        {
+            width: 1670px;
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
+        .fixed_headers th
+        {
+            text-decoration: none;
+        }
+        .fixed_headers th, .fixed_headers td
+        {
+            padding: 2px;
+            text-align: center;
+        }
+        .fixed_headers td:nth-child(1), .fixed_headers th:nth-child(1)
+        {
+            min-width: 50px;
+        }
+        .fixed_headers td:nth-child(2), .fixed_headers th:nth-child(2)
+        {
+            min-width: 80px;
+        }
+        .fixed_headers td:nth-child(3), .fixed_headers th:nth-child(3)
+        {
+            min-width: 30px;
+        }
+        .fixed_headers td:nth-child(4), .fixed_headers th:nth-child(4)
+        {
+            min-width: 55px;
+        }
+        .fixed_headers td:nth-child(5), .fixed_headers th:nth-child(5)
+        {
+            min-width: 85px;
+        }
+        .fixed_headers td:nth-child(6), .fixed_headers th:nth-child(6)
+        {
+            min-width: 75px;
+        }
+        .fixed_headers td:nth-child(7), .fixed_headers th:nth-child(7)
+        {
+            min-width: 75px;
+        }
+        .fixed_headers td:nth-child(8), .fixed_headers th:nth-child(8)
+        {
+            min-width: 70px;
+        }
+        .fixed_headers td:nth-child(9), .fixed_headers th:nth-child(9)
+        {
+            min-width: 90px;
+        }
+        .fixed_headers td:nth-child(10), .fixed_headers th:nth-child(10)
+        {
+            min-width: 90px;
+        }
+        .fixed_headers td:nth-child(11), .fixed_headers th:nth-child(11)
+        {
+            min-width: 75px;
+        }
+        .fixed_headers td:nth-child(12), .fixed_headers th:nth-child(12)
+        {
+            min-width: 115px;
+        }
+        .fixed_headers td:nth-child(13), .fixed_headers th:nth-child(13)
+        {
+            min-width: 145px;
+        }
+        .fixed_headers td:nth-child(14), .fixed_headers th:nth-child(14)
+        {
+            min-width: 155px;
+        }
+        .fixed_headers td:nth-child(15), .fixed_headers th:nth-child(15)
+        {
+            min-width: 155px;
+        }
+        .fixed_headers td:nth-child(16), .fixed_headers th:nth-child(16)
+        {
+            min-width: 160px;
+        }
+        .fixed_headers td:nth-child(17), .fixed_headers th:nth-child(17)
+        {
+            min-width: 160px;
+        }
+        .fixed_headers thead
+        {
+            background-color: #6b668c;
+            color: #fdfdfd;
+        }
+        .fixed_headers thead tr
+        {
+            display: block;
+            position: relative;
+        }
+        .fixed_headers tbody
+        {
+            display: block;
+            overflow: auto;
+            width: 100%;
+            height: 350px;
+        }
+        .fixed_headers tbody tr:nth-child(even)
+        {
+            background-color: #DCDCDC;
+        }
+        .old_ie_wrapper
+        {
+            height: 300px;
+            width: 1000px;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        .old_ie_wrapper tbody
+        {
+            height: auto;
+        }
+    </style>
+</head>
+<body ng-controller="PassthroughCtrl">
+    <div style="width: 95%; margin: 0px auto">
+        <form name="suryodaydashBoard" novalidate>
+        <input type="button" value="Sort" ng-click="Sorting()" />
+        <a href="Passthrough.htm">Refresh</a>
+        <div style="float: right; margin-bottom: 10px; margin-right: 10px">
+            <select ng-model="Time" ng-change="changedValue(Time)" data-ng-options="item as item.Time for item in Option">
+                <option value="">Last 2 Minute</option>
+            </select>
+            {{item.Time}}
+            <input type="text" id="search_field" ng-model="search" placeholder="Search Box" />
+        </div>
+        </form>
+        <div id="loader" style="display: none">
+        </div>
+        <hr style="height: 2px; color: Black" />
+        <table id="aepsdashboardtable" class="fixed_headers">
+            <thead>
+                <tr>
+                    <th>
+                        Sr No.
+                    </th>
+                    <th>
+                        App
+                    </th>
+                    <th>
+                        Inst
+                    </th>
+                    <th>
+                        Req Total
+                    </th>
+                    <th>
+                        Req Success
+                    </th>
+                    <th>
+                        Req ScktErr
+                    </th>
+                    <th>
+                        Req Fail%
+                    </th>
+                    <th>
+                        Resp Total
+                    </th>
+                    <th>
+                        Resp Success
+                    </th>
+                    <th>
+                        Resp TimeOut
+                    </th>
+                    <th>
+                        Resp Fail%
+                    </th>
+                    <th>
+                        IP Port
+                    </th>
+                    <th>
+                        NPCI Port
+                    </th>
+                    <th>
+                        Last SuccessRequest
+                    </th>
+                    <th>
+                        Last FailRequest
+                    </th>
+                    <th>
+                        Last SuccessResponse
+                    </th>
+                    <th>
+                        Last FailResponse
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="data in Response | orderBy:sortType:sortReverse | filter:search">
+                    <td>
+                    </td>
+                    <td>
+                        {{data.AppLications}}
+                    </td>
+                    <td>
+                        {{data.InstanceId}}
+                    </td>
+                    <td>
+                        {{data.Request_Total}}
+                    </td>
+                    <td>
+                        {{data.Request_Success}}
+                    </td>
+                    <td>
+                        {{data.Request_Socket_Error}}
+                    </td>
+                    <td ng-if="data.Fail_Request_Percent >= 0 && data.Fail_Request_Percent <= 5 " style="background-color: #008000;
+                        color: Yellow; font-weight: bold">
+                        {{data.Fail_Request_Percent}}
+                    </td>
+                    <td ng-if="data.Fail_Request_Percent > 5 && data.Fail_Request_Percent <= 10 " style="background-color: Orange;
+                        color: Yellow; font-weight: bold">
+                        {{data.Fail_Request_Percent}}
+                    </td>
+                    <td ng-if="data.Fail_Request_Percent < 0 || data.Fail_Request_Percent > 10" style="background-color: Red;
+                        color: Yellow; font-weight: bold">
+                        {{data.Fail_Request_Percent}}
+                    </td>
+                    <td>
+                        {{data.Response_Total}}
+                    </td>
+                    <td>
+                        {{data.Response_Success}}
+                    </td>
+                    <td>
+                        {{data.Response_Time_Out}}
+                    </td>
+                    <td ng-if="data.Fail_Response_Percent >= 0 && data.Fail_Response_Percent <= 5 " style="background-color: #008000;
+                        color: Yellow; font-weight: bold">
+                        {{data.Fail_Response_Percent}}
+                    </td>
+                    <td ng-if="data.Fail_Response_Percent > 5 && data.Fail_Response_Percent <= 10 " style="background-color: Orange;
+                        color: Yellow; font-weight: bold">
+                        {{data.Fail_Response_Percent}}
+                    </td>
+                    <td ng-if="data.Fail_Response_Percent < 0 || data.Fail_Response_Percent > 10" style="background-color: Red;
+                        color: Yellow; font-weight: bold">
+                        {{data.Fail_Response_Percent}}
+                    </td>
+                    <td>
+                        {{data.IP_Port}}
+                    </td>
+                    <td>
+                        {{data.NPCI_Port}}
+                    </td>
+                    <td>
+                        {{data.Last_SuccessRequest}}
+                    </td>
+                    <td>
+                        {{data.Last_FailRequest}}
+                    </td>
+                    <td>
+                        {{data.Last_SuccessResponse}}
+                    </td>
+                    <td>
+                        {{data.Last_FailResponse}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

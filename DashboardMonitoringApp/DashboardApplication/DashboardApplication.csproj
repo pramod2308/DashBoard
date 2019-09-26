@@ -1,0 +1,797 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C7B1C899-7555-4C7C-B639-BC37FF654A6E}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DashboardApplication</RootNamespace>
+    <AssemblyName>DashboardApplication</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AESBouncyEncryption, Version=1.0.5350.31379, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\AESBouncyEncryption.dll</HintPath>
+    </Reference>
+    <Reference Include="BouncyCastle.Crypto, Version=1.7.4114.6375, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Normal, Version=3.0.6677.27975, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Normal.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AccountOpening.aspx" />
+    <Content Include="AEPS.aspx" />
+    <Content Include="AEPSAPI.aspx" />
+    <Content Include="AEPSFailed.aspx" />
+    <Content Include="AEPSISSUER.aspx" />
+    <Content Include="AEPSNew.aspx" />
+    <Content Include="AUAASA.aspx" />
+    <Content Include="bootstrap\dist\css\bootstrap-dialog.css" />
+    <Content Include="bootstrap\dist\css\bootstrap-theme.css" />
+    <Content Include="bootstrap\dist\css\bootstrap-theme.min.css" />
+    <Content Include="bootstrap\dist\css\bootstrap.css" />
+    <Content Include="bootstrap\dist\css\bootstrap.min.css" />
+    <Content Include="bootstrap\dist\css\Logs.css" />
+    <Content Include="bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="bootstrap\dist\js\bootstrap.js" />
+    <Content Include="bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="bootstrap\dist\js\npm.js" />
+    <Content Include="bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="bootstrap\Gruntfile.js" />
+    <Content Include="bootstrap\grunt\bs-commonjs-generator.js" />
+    <Content Include="bootstrap\grunt\bs-glyphicons-data-generator.js" />
+    <Content Include="bootstrap\grunt\bs-lessdoc-parser.js" />
+    <Content Include="bootstrap\grunt\bs-raw-files-generator.js" />
+    <Content Include="bootstrap\js\affix.js" />
+    <Content Include="bootstrap\js\alert.js" />
+    <Content Include="bootstrap\js\bootstrap-dialog.js" />
+    <Content Include="bootstrap\js\button.js" />
+    <Content Include="bootstrap\js\carousel.js" />
+    <Content Include="bootstrap\js\collapse.js" />
+    <Content Include="bootstrap\js\dropdown.js" />
+    <Content Include="bootstrap\js\modal.js" />
+    <Content Include="bootstrap\js\popover.js" />
+    <Content Include="bootstrap\js\scrollspy.js" />
+    <Content Include="bootstrap\js\tab.js" />
+    <Content Include="bootstrap\js\tooltip.js" />
+    <Content Include="bootstrap\js\transition.js" />
+    <Content Include="CacheFailureDetails.aspx" />
+    <Content Include="CashBazaar.aspx" />
+    <Content Include="CashCollectionSummary.aspx" />
+    <Content Include="CityCash.aspx" />
+    <Content Include="CMSAPI.aspx" />
+    <Content Include="CMSFailed.aspx" />
+    <Content Include="DashBoardStatusCod.aspx" />
+    <Content Include="Datatable\images\animated-overlay.gif" />
+    <Content Include="Datatable\images\back_disabled.png" />
+    <Content Include="Datatable\images\back_enabled.png" />
+    <Content Include="Datatable\images\back_enabled_hover.png" />
+    <Content Include="Datatable\images\favicon.ico" />
+    <Content Include="Datatable\images\forward_disabled.png" />
+    <Content Include="Datatable\images\forward_enabled.png" />
+    <Content Include="Datatable\images\forward_enabled_hover.png" />
+    <Content Include="Datatable\images\sort_asc.png" />
+    <Content Include="Datatable\images\sort_asc_disabled.png" />
+    <Content Include="Datatable\images\sort_both.png" />
+    <Content Include="Datatable\images\sort_desc.png" />
+    <Content Include="Datatable\images\sort_desc_disabled.png" />
+    <Content Include="Datatable\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="Datatable\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="Datatable\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="Datatable\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="Datatable\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="Datatable\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Datatable\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="Datatable\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="Datatable\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="Datatable\images\ui-icons_222222_256x240.png" />
+    <Content Include="Datatable\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="Datatable\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="Datatable\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="Datatable\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="DMSACCOpening.aspx" />
+    <Content Include="DMSACCOpening2.aspx" />
+    <Content Include="DMSDashBoard.aspx" />
+    <Content Include="DMS_Account_DashBoard.aspx" />
+    <Content Include="DMS_LENDING_DASHBOARD.aspx" />
+    <Content Include="EKO.aspx" />
+    <Content Include="EKOServerStatus.aspx" />
+    <Content Include="EKO_Failed.aspx" />
+    <Content Include="ESBLatency1.aspx" />
+    <Content Include="ESBLatency2.aspx" />
+    <Content Include="ESBLatencyReport.aspx" />
+    <Content Include="ESBNodeWiseLatency.aspx" />
+    <Content Include="ESBServiceWiseLatency.aspx" />
+    <Content Include="ESB_Latency_DBInsertion.aspx" />
+    <Content Include="HA_ESB_Latency.aspx" />
+    <Content Include="HtmlPages\DashBoard\AccountOpening.htm" />
+    <Content Include="HtmlPages\DashBoard\AEPSAPI.htm" />
+    <Content Include="HtmlPages\DashBoard\AEPSFailed.htm" />
+    <Content Include="HtmlPages\DashBoard\AEPSNew.htm" />
+    <Content Include="HtmlPages\DashBoard\AEPS_ISSUER.htm" />
+    <Content Include="HtmlPages\DashBoard\AUAASA.htm" />
+    <Content Include="HtmlPages\DashBoard\CacheFailueDetails.htm" />
+    <Content Include="HtmlPages\DashBoard\CashBazaar.htm" />
+    <Content Include="HtmlPages\DashBoard\CashCollectionSummary.htm" />
+    <Content Include="HtmlPages\DashBoard\CityCash.htm" />
+    <Content Include="HtmlPages\DashBoard\CMSAPI.htm" />
+    <Content Include="HtmlPages\DashBoard\CMSFailed.htm" />
+    <Content Include="HtmlPages\DashBoard\COLAReport.htm" />
+    <Content Include="HtmlPages\DashBoard\DMSACCOpening.htm" />
+    <Content Include="HtmlPages\DashBoard\DMSACCOpening2.htm" />
+    <Content Include="HtmlPages\DashBoard\DMSDashBoard.htm" />
+    <Content Include="HtmlPages\DashBoard\DMS_Account_DashBoard.htm" />
+    <Content Include="HtmlPages\DashBoard\DMS_LENDING_DASHBOARD.htm" />
+    <Content Include="HtmlPages\DashBoard\EKO.htm" />
+    <Content Include="HtmlPages\DashBoard\EKOServerStatus.htm" />
+    <Content Include="HtmlPages\DashBoard\EKO_Failed.htm" />
+    <Content Include="HtmlPages\DashBoard\ESBDashBoard.htm" />
+    <Content Include="HtmlPages\DashBoard\ESBLatency.htm" />
+    <Content Include="HtmlPages\DashBoard\ESBNodeWiseLatency.htm" />
+    <Content Include="HtmlPages\DashBoard\ESBServiceWiseLatency.htm" />
+    <Content Include="HtmlPages\DashBoard\ESB_Latency_DBInsertion.htm" />
+    <Content Include="HtmlPages\DashBoard\ESB_Latency_Report.htm" />
+    <Content Include="HtmlPages\DashBoard\HA_ESB_Latency.htm" />
+    <Content Include="HtmlPages\DashBoard\IMPS.htm" />
+    <Content Include="HtmlPages\DashBoard\ImpsSummary.htm" />
+    <Content Include="HtmlPages\DashBoard\Logs.html" />
+    <Content Include="HtmlPages\DashBoard\MerchantTransaction.htm" />
+    <Content Include="HtmlPages\DashBoard\Node_Latency.htm" />
+    <Content Include="HtmlPages\DashBoard\Notrefire.htm" />
+    <Content Include="HtmlPages\DashBoard\Passthrough.htm" />
+    <Content Include="HtmlPages\DashBoard\Refire.htm" />
+    <Content Include="HtmlPages\DashBoard\Rupay.htm" />
+    <Content Include="HtmlPages\DashBoard\RupayNew.htm" />
+    <Content Include="HtmlPages\DashBoard\Service_Latency.htm" />
+    <Content Include="HtmlPages\DashBoard\Suryoday.htm" />
+    <Content Include="IMPS.aspx" />
+    <Content Include="ImpsSummary.aspx" />
+    <Content Include="Index.htm" />
+    <Content Include="JS\angular-ui-router.js" />
+    <Content Include="JS\DashBoard\AccountOpeningCtrl.js" />
+    <Content Include="JS\DashBoard\AEPSAPI.js" />
+    <Content Include="JS\DashBoard\AEPSFailedCtrl.js" />
+    <Content Include="JS\DashBoard\AEPSNewCtrl.js" />
+    <Content Include="JS\DashBoard\AEPS_ISSUER.js" />
+    <Content Include="JS\DashBoard\AUAASACtrl.js" />
+    <Content Include="JS\DashBoard\CacheFailureDetailsCtrl.js" />
+    <Content Include="JS\DashBoard\CashbazaarCtrl.js" />
+    <Content Include="JS\DashBoard\CashCollectionSummaryCtrl.js" />
+    <Content Include="JS\DashBoard\CityCashCtrl.js" />
+    <Content Include="JS\DashBoard\CMSAPICtrl.js" />
+    <Content Include="JS\DashBoard\CMSFailedCtrl.js" />
+    <Content Include="JS\DashBoard\COLAReport.js" />
+    <Content Include="JS\DashBoard\DMSACCOpemingCtrl.js" />
+    <Content Include="JS\DashBoard\DMSACCOpemingCtrl2.js" />
+    <Content Include="JS\DashBoard\DMSDashboardCtrl.js" />
+    <Content Include="JS\DashBoard\DMS_Account_DashBoardCtrl.js" />
+    <Content Include="JS\DashBoard\DMS_LENDING_DASHBOARD.js" />
+    <Content Include="JS\DashBoard\EKOCtrl.js" />
+    <Content Include="JS\DashBoard\EKOServerStatusCtrl.js" />
+    <Content Include="JS\DashBoard\EKO_Failed.js" />
+    <Content Include="JS\DashBoard\ESBDashboardCtrl.js" />
+    <Content Include="JS\DashBoard\ESBLatencyCtrl.js" />
+    <Content Include="JS\DashBoard\ESBNodeWiseLatency.js" />
+    <Content Include="JS\DashBoard\ESBServiceWiseLatency.js" />
+    <Content Include="JS\DashBoard\ESB_Latency_DBInsertion.js" />
+    <Content Include="JS\DashBoard\ESB_Latency_Report.js" />
+    <Content Include="JS\DashBoard\HA_ESB_Latency.js" />
+    <Content Include="JS\DashBoard\IMPSCtrl.js" />
+    <Content Include="JS\DashBoard\ImpsSummaryCtrl.js" />
+    <Content Include="JS\DashBoard\Logs.js" />
+    <Content Include="JS\DashBoard\MerchantTransaction.js" />
+    <Content Include="JS\DashBoard\NodeLatency.js" />
+    <Content Include="JS\DashBoard\NotRefireCtrl.js" />
+    <Content Include="JS\DashBoard\PassthroughCtrl.js" />
+    <Content Include="JS\PBaes.js" />
+    <Content Include="JS\DashBoard\RefireCtrl.js" />
+    <Content Include="JS\DashBoard\RupayCtrl.js" />
+    <Content Include="JS\DashBoard\RUPAYNewCtrl.js" />
+    <Content Include="JS\DashBoard\ServiceLatency.js" />
+    <Content Include="JS\DashBoard\SuryodayCtrl.js" />
+    <Content Include="Kendo\kendo.all.min.js" />
+    <Content Include="Kendo\kendo.bootstrap.min.css" />
+    <Content Include="Kendo\kendo.common.min.css" />
+    <Content Include="Login.aspx" />
+    <Content Include="Logs.aspx" />
+    <Content Include="MerchantTransaction.aspx" />
+    <Content Include="NodeLatency.aspx" />
+    <Content Include="DashboardAppService.svc" />
+    <Content Include="Datatable\jquery-ui-1.11.4.js" />
+    <Content Include="Datatable\jquery-ui.css" />
+    <Content Include="ESBFailed_Awaiting.aspx" />
+    <Content Include="FifthDashBoard.aspx" />
+    <Content Include="FourtdashBoard.aspx" />
+    <Content Include="HtmlPages\DashBoard\ESBFailed_Awaiting.htm" />
+    <Content Include="HtmlPages\DashBoard\FifthDashBoard.htm" />
+    <Content Include="HtmlPages\DashBoard\FirstDashBoard.html" />
+    <Content Include="Firsttab.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="HtmlPages\DashBoard\FourtDashBoard.html" />
+    <Content Include="img\loader.gif" />
+    <Content Include="img\login_bg.png" />
+    <Content Include="JS\app.js" />
+    <Content Include="JS\Comman\angular.js" />
+    <Content Include="JS\DashBoard\DashBoardStatusCode.js" />
+    <Content Include="JS\DashBoard\ESBFailed_Awaiting.js" />
+    <Content Include="JS\DashBoard\FifthDashBoard.js" />
+    <Content Include="JS\DashBoard\FirstDashBoardCtrl.js" />
+    <Content Include="JS\DashBoard\FourtDashBoard.js" />
+    <Content Include="JS\jquery.dragtable.js" />
+    <Content Include="JS\jquery.js" />
+    <Content Include="JS\jquery.simple-dtpicker.js" />
+    <Content Include="JS\main.js" />
+    <Content Include="JS\DashBoard\SecondDashBoardCtrl.js" />
+    <Content Include="HtmlPages\DashBoard\SecondDashBoard.html" />
+    <Content Include="NotRefire.aspx" />
+    <Content Include="Passthrough.aspx" />
+    <Content Include="Refire.aspx" />
+    <Content Include="Register.aspx" />
+    <Content Include="Rupay.aspx" />
+    <Content Include="RupayNew.aspx" />
+    <Content Include="Secondtab.aspx" />
+    <Content Include="HtmlPages\DashBoard\Status_Code_Count.html" />
+    <Content Include="ServiceLatency.aspx" />
+    <Content Include="Styles\BootStrap.css" />
+    <Content Include="Styles\DashBoard.css" />
+    <Content Include="Styles\dragtable.css" />
+    <Content Include="Styles\jquery.simple-dtpicker.css" />
+    <Content Include="Styles\login.css" />
+    <Content Include="Styles\LoginStyle.css" />
+    <Content Include="Styles\signin.css" />
+    <Content Include="Styles\Site.css" />
+    <Content Include="Suryoday.aspx" />
+    <Content Include="Test.htm" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountOpening.aspx.cs">
+      <DependentUpon>AccountOpening.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AccountOpening.aspx.designer.cs">
+      <DependentUpon>AccountOpening.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AEPS.aspx.cs">
+      <DependentUpon>AEPS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AEPS.aspx.designer.cs">
+      <DependentUpon>AEPS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AEPSAPI.aspx.cs">
+      <DependentUpon>AEPSAPI.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AEPSAPI.aspx.designer.cs">
+      <DependentUpon>AEPSAPI.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AEPSFailed.aspx.cs">
+      <DependentUpon>AEPSFailed.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AEPSFailed.aspx.designer.cs">
+      <DependentUpon>AEPSFailed.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AEPSISSUER.aspx.cs">
+      <DependentUpon>AEPSISSUER.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AEPSISSUER.aspx.designer.cs">
+      <DependentUpon>AEPSISSUER.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AEPSNew.aspx.cs">
+      <DependentUpon>AEPSNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AEPSNew.aspx.designer.cs">
+      <DependentUpon>AEPSNew.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AUAASA.aspx.cs">
+      <DependentUpon>AUAASA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AUAASA.aspx.designer.cs">
+      <DependentUpon>AUAASA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CacheFailureDetails.aspx.cs">
+      <DependentUpon>CacheFailureDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CacheFailureDetails.aspx.designer.cs">
+      <DependentUpon>CacheFailureDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CashBazaar.aspx.cs">
+      <DependentUpon>CashBazaar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CashBazaar.aspx.designer.cs">
+      <DependentUpon>CashBazaar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CashCollectionSummary.aspx.cs">
+      <DependentUpon>CashCollectionSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CashCollectionSummary.aspx.designer.cs">
+      <DependentUpon>CashCollectionSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CityCash.aspx.cs">
+      <DependentUpon>CityCash.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CityCash.aspx.designer.cs">
+      <DependentUpon>CityCash.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="clsDashboard.cs" />
+    <Compile Include="CMSAPI.aspx.cs">
+      <DependentUpon>CMSAPI.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CMSAPI.aspx.designer.cs">
+      <DependentUpon>CMSAPI.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CMSFailed.aspx.cs">
+      <DependentUpon>CMSFailed.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CMSFailed.aspx.designer.cs">
+      <DependentUpon>CMSFailed.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DashBoardStatusCod.aspx.cs">
+      <DependentUpon>DashBoardStatusCod.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DashBoardStatusCod.aspx.designer.cs">
+      <DependentUpon>DashBoardStatusCod.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DMSACCOpening.aspx.cs">
+      <DependentUpon>DMSACCOpening.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DMSACCOpening.aspx.designer.cs">
+      <DependentUpon>DMSACCOpening.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DMSACCOpening2.aspx.cs">
+      <DependentUpon>DMSACCOpening2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DMSACCOpening2.aspx.designer.cs">
+      <DependentUpon>DMSACCOpening2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DMSDashBoard.aspx.cs">
+      <DependentUpon>DMSDashBoard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DMSDashBoard.aspx.designer.cs">
+      <DependentUpon>DMSDashBoard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DMS_Account_DashBoard.aspx.cs">
+      <DependentUpon>DMS_Account_DashBoard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DMS_Account_DashBoard.aspx.designer.cs">
+      <DependentUpon>DMS_Account_DashBoard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DMS_LENDING_DASHBOARD.aspx.cs">
+      <DependentUpon>DMS_LENDING_DASHBOARD.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DMS_LENDING_DASHBOARD.aspx.designer.cs">
+      <DependentUpon>DMS_LENDING_DASHBOARD.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EKO.aspx.cs">
+      <DependentUpon>EKO.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EKO.aspx.designer.cs">
+      <DependentUpon>EKO.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EKOServerStatus.aspx.cs">
+      <DependentUpon>EKOServerStatus.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EKOServerStatus.aspx.designer.cs">
+      <DependentUpon>EKOServerStatus.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EKO_Failed.aspx.cs">
+      <DependentUpon>EKO_Failed.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EKO_Failed.aspx.designer.cs">
+      <DependentUpon>EKO_Failed.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ESBLatency1.aspx.cs">
+      <DependentUpon>ESBLatency1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ESBLatency1.aspx.designer.cs">
+      <DependentUpon>ESBLatency1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ESBLatency2.aspx.cs">
+      <DependentUpon>ESBLatency2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ESBLatency2.aspx.designer.cs">
+      <DependentUpon>ESBLatency2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ESBLatencyReport.aspx.cs">
+      <DependentUpon>ESBLatencyReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ESBLatencyReport.aspx.designer.cs">
+      <DependentUpon>ESBLatencyReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ESBNodeWiseLatency.aspx.cs">
+      <DependentUpon>ESBNodeWiseLatency.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ESBNodeWiseLatency.aspx.designer.cs">
+      <DependentUpon>ESBNodeWiseLatency.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ESBServiceWiseLatency.aspx.cs">
+      <DependentUpon>ESBServiceWiseLatency.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ESBServiceWiseLatency.aspx.designer.cs">
+      <DependentUpon>ESBServiceWiseLatency.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ESB_Latency_DBInsertion.aspx.cs">
+      <DependentUpon>ESB_Latency_DBInsertion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ESB_Latency_DBInsertion.aspx.designer.cs">
+      <DependentUpon>ESB_Latency_DBInsertion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HA_ESB_Latency.aspx.cs">
+      <DependentUpon>HA_ESB_Latency.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HA_ESB_Latency.aspx.designer.cs">
+      <DependentUpon>HA_ESB_Latency.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="IMPS.aspx.cs">
+      <DependentUpon>IMPS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="IMPS.aspx.designer.cs">
+      <DependentUpon>IMPS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ImpsSummary.aspx.cs">
+      <DependentUpon>ImpsSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ImpsSummary.aspx.designer.cs">
+      <DependentUpon>ImpsSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Logs.aspx.cs">
+      <DependentUpon>Logs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logs.aspx.designer.cs">
+      <DependentUpon>Logs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MerchantTransaction.aspx.cs">
+      <DependentUpon>MerchantTransaction.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MerchantTransaction.aspx.designer.cs">
+      <DependentUpon>MerchantTransaction.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NodeLatency.aspx.cs">
+      <DependentUpon>NodeLatency.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NodeLatency.aspx.designer.cs">
+      <DependentUpon>NodeLatency.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DashboardAppService.svc.cs">
+      <DependentUpon>DashboardAppService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="ESBFailed_Awaiting.aspx.cs">
+      <DependentUpon>ESBFailed_Awaiting.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ESBFailed_Awaiting.aspx.designer.cs">
+      <DependentUpon>ESBFailed_Awaiting.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FifthDashBoard.aspx.cs">
+      <DependentUpon>FifthDashBoard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FifthDashBoard.aspx.designer.cs">
+      <DependentUpon>FifthDashBoard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Firsttab.aspx.cs">
+      <DependentUpon>Firsttab.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Firsttab.aspx.designer.cs">
+      <DependentUpon>Firsttab.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FourtdashBoard.aspx.cs">
+      <DependentUpon>FourtdashBoard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FourtdashBoard.aspx.designer.cs">
+      <DependentUpon>FourtdashBoard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="IDashboardAppService.cs" />
+    <Compile Include="NotRefire.aspx.cs">
+      <DependentUpon>NotRefire.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NotRefire.aspx.designer.cs">
+      <DependentUpon>NotRefire.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Passthrough.aspx.cs">
+      <DependentUpon>Passthrough.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Passthrough.aspx.designer.cs">
+      <DependentUpon>Passthrough.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Refire.aspx.cs">
+      <DependentUpon>Refire.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Refire.aspx.designer.cs">
+      <DependentUpon>Refire.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Rupay.aspx.cs">
+      <DependentUpon>Rupay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Rupay.aspx.designer.cs">
+      <DependentUpon>Rupay.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RupayNew.aspx.cs">
+      <DependentUpon>RupayNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RupayNew.aspx.designer.cs">
+      <DependentUpon>RupayNew.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Secondtab.aspx.cs">
+      <DependentUpon>Secondtab.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Secondtab.aspx.designer.cs">
+      <DependentUpon>Secondtab.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceLatency.aspx.cs">
+      <DependentUpon>ServiceLatency.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ServiceLatency.aspx.designer.cs">
+      <DependentUpon>ServiceLatency.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sitemap.Master.cs">
+      <DependentUpon>sitemap.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sitemap.Master.designer.cs">
+      <DependentUpon>sitemap.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Suryoday.aspx.cs">
+      <DependentUpon>Suryoday.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Suryoday.aspx.designer.cs">
+      <DependentUpon>Suryoday.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="sitemap.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bootstrap\.bower.json" />
+    <None Include="bootstrap\bower.json" />
+    <None Include="bootstrap\dist\css\bootstrap-theme.css.map" />
+    <None Include="bootstrap\dist\css\bootstrap.css.map" />
+    <None Include="bootstrap\dist\fonts\glyphicons-halflings-regular.eot" />
+    <None Include="bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="bootstrap\dist\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <None Include="bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="bootstrap\grunt\.jshintrc" />
+    <None Include="bootstrap\grunt\configBridge.json" />
+    <None Include="bootstrap\grunt\sauce_browsers.yml" />
+    <None Include="bootstrap\js\.jscsrc" />
+    <None Include="bootstrap\js\.jshintrc" />
+    <None Include="bootstrap\less\.csscomb.json" />
+    <None Include="bootstrap\less\.csslintrc" />
+    <None Include="bootstrap\less\alerts.less" />
+    <None Include="bootstrap\less\badges.less" />
+    <None Include="bootstrap\less\bootstrap.less" />
+    <None Include="bootstrap\less\breadcrumbs.less" />
+    <None Include="bootstrap\less\button-groups.less" />
+    <None Include="bootstrap\less\buttons.less" />
+    <None Include="bootstrap\less\carousel.less" />
+    <None Include="bootstrap\less\close.less" />
+    <None Include="bootstrap\less\code.less" />
+    <None Include="bootstrap\less\component-animations.less" />
+    <None Include="bootstrap\less\dropdowns.less" />
+    <None Include="bootstrap\less\forms.less" />
+    <None Include="bootstrap\less\glyphicons.less" />
+    <None Include="bootstrap\less\grid.less" />
+    <None Include="bootstrap\less\input-groups.less" />
+    <None Include="bootstrap\less\jumbotron.less" />
+    <None Include="bootstrap\less\labels.less" />
+    <None Include="bootstrap\less\list-group.less" />
+    <None Include="bootstrap\less\media.less" />
+    <None Include="bootstrap\less\mixins.less" />
+    <None Include="bootstrap\less\mixins\alerts.less" />
+    <None Include="bootstrap\less\mixins\background-variant.less" />
+    <None Include="bootstrap\less\mixins\border-radius.less" />
+    <None Include="bootstrap\less\mixins\buttons.less" />
+    <None Include="bootstrap\less\mixins\center-block.less" />
+    <None Include="bootstrap\less\mixins\clearfix.less" />
+    <None Include="bootstrap\less\mixins\forms.less" />
+    <None Include="bootstrap\less\mixins\gradients.less" />
+    <None Include="bootstrap\less\mixins\grid-framework.less" />
+    <None Include="bootstrap\less\mixins\grid.less" />
+    <None Include="bootstrap\less\mixins\hide-text.less" />
+    <None Include="bootstrap\less\mixins\image.less" />
+    <None Include="bootstrap\less\mixins\labels.less" />
+    <None Include="bootstrap\less\mixins\list-group.less" />
+    <None Include="bootstrap\less\mixins\nav-divider.less" />
+    <None Include="bootstrap\less\mixins\nav-vertical-align.less" />
+    <None Include="bootstrap\less\mixins\opacity.less" />
+    <None Include="bootstrap\less\mixins\pagination.less" />
+    <None Include="bootstrap\less\mixins\panels.less" />
+    <None Include="bootstrap\less\mixins\progress-bar.less" />
+    <None Include="bootstrap\less\mixins\reset-filter.less" />
+    <None Include="bootstrap\less\mixins\resize.less" />
+    <None Include="bootstrap\less\mixins\responsive-visibility.less" />
+    <None Include="bootstrap\less\mixins\size.less" />
+    <None Include="bootstrap\less\mixins\tab-focus.less" />
+    <None Include="bootstrap\less\mixins\table-row.less" />
+    <None Include="bootstrap\less\mixins\text-emphasis.less" />
+    <None Include="bootstrap\less\mixins\text-overflow.less" />
+    <None Include="bootstrap\less\mixins\vendor-prefixes.less" />
+    <None Include="bootstrap\less\modals.less" />
+    <None Include="bootstrap\less\navbar.less" />
+    <None Include="bootstrap\less\navs.less" />
+    <None Include="bootstrap\less\normalize.less" />
+    <None Include="bootstrap\less\pager.less" />
+    <None Include="bootstrap\less\pagination.less" />
+    <None Include="bootstrap\less\panels.less" />
+    <None Include="bootstrap\less\popovers.less" />
+    <None Include="bootstrap\less\print.less" />
+    <None Include="bootstrap\less\progress-bars.less" />
+    <None Include="bootstrap\less\responsive-embed.less" />
+    <None Include="bootstrap\less\responsive-utilities.less" />
+    <None Include="bootstrap\less\scaffolding.less" />
+    <None Include="bootstrap\less\tables.less" />
+    <None Include="bootstrap\less\theme.less" />
+    <None Include="bootstrap\less\thumbnails.less" />
+    <None Include="bootstrap\less\tooltip.less" />
+    <None Include="bootstrap\less\type.less" />
+    <None Include="bootstrap\less\utilities.less" />
+    <None Include="bootstrap\less\variables.less" />
+    <None Include="bootstrap\less\wells.less" />
+    <None Include="bootstrap\LICENSE" />
+    <None Include="bootstrap\package.json" />
+    <None Include="bootstrap\README.md" />
+    <None Include="Datatable\images\Sorting icons.psd" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>1123</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <EnableWcfTestClientForSVCDefaultValue>True</EnableWcfTestClientForSVCDefaultValue>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

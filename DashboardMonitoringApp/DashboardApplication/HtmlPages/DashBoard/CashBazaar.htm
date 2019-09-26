@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" data-ng-app="app">
+<head>
+    <title></title>
+    <link href="../../bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="../../Styles/DashBoard.css" rel="stylesheet" type="text/css" />
+    <script src="../../JS/jquery.js" type="text/javascript"></script>
+    <script src="../../JS/Comman/angular.js" type="text/javascript"></script>
+    <script src="../../JS/app.js" type="text/javascript"></script>
+    <script src="../../JS/main.js" type="text/javascript"></script>
+    <script src="../../JS/DashBoard/CashbazaarCtrl.js" type="text/javascript"></script>
+    <style rel="stylesheet" type="text/css">
+        #cashbazaarFullCount
+        {
+            font-size: 12px;
+            counter-reset: serial-number;
+        }
+      
+        #cashbazaarDailyCount
+        {
+            font-size: 12px;
+            counter-reset: serial-number;
+        }
+        .fixed_headers th
+        {
+            text-decoration: none;
+        }
+        .fixed_headers th, .fixed_headers td
+        {
+            padding: 2px;
+            text-align: center;
+        }
+
+        .fixed_headers thead
+        {
+            background-color: #6b668c;
+            color: #fdfdfd;
+        }
+      
+        .fixed_headers tbody
+        {
+            overflow: auto;
+            width: 100%;
+            height: 350px;
+        }
+        .fixed_headers td:nth-child(1), .fixed_headers th:nth-child(1)
+        {
+            min-width: 120px;
+        }
+        .fixed_headers td:nth-child(2), .fixed_headers th:nth-child(2)
+        {
+            min-width: 120px;
+        }
+        .fixed_headers td:nth-child(3), .fixed_headers th:nth-child(3)
+        {
+            min-width: 120px;
+        }
+        .fixed_headers tbody tr:nth-child(even)
+        {
+            background-color: #DCDCDC;
+        }
+        .old_ie_wrapper
+        {
+            height: 300px;
+            width: 1000px;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        .old_ie_wrapper tbody
+        {
+            height: auto;
+        }
+    </style>
+</head>
+<body ng-controller="CashBazaarCtrl">
+<div id="loader" style="display: none">
+    </div>
+<div style = "margin:0px auto;width:65%;">
+    <div style="display: inline-block">
+    <center><b>Total  Transactions since Inception</b></center><br />
+        <table id="cashbazaarFullCount" class="fixed_headers">
+            <thead>
+                <tr>
+                    <th>
+                        Sr.No
+                    </th>
+                    <th>
+                        Transaction Status
+                    </th>
+                    <th>
+                        FullTxnCount
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="data in Response | filter:search">
+                    
+                    <td>
+                        {{data.id}}
+                    </td>
+                    <td>
+                        {{data.TxnStatus}}
+                    </td>
+                    <td>
+                        {{data.FullTxnCount}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div style="display: inline-block;margin-left:50px">
+    <center><b>Todays Transactions </b></center><br />
+        <table id="cashbazaarDailyCount" class="fixed_headers">
+            <thead>
+                <tr>
+                    <th>
+                        Sr.No
+                    </th>
+                    <th>
+                        Transaction Status
+                    </th>
+                    <th>
+                        TodaysTxnCount
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="data in Response1 | filter:search">
+                   
+                    <td>
+                        {{data.id}}
+                    </td>
+                    <td>
+                        {{data.TxnStatus}}
+                    </td>
+                    <td>
+                        {{data.TodaysTxnCount}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+</body>
+</html>

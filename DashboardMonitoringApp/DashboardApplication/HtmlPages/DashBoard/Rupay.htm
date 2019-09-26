@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" data-ng-app="app">
+<head>
+    <title></title>
+    <link href="../../bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="../../Styles/DashBoard.css" rel="stylesheet" type="text/css" />
+    <script src="../../JS/jquery.js" type="text/javascript"></script>
+    <script src="../../JS/Comman/angular.js" type="text/javascript"></script>
+    <script src="../../JS/app.js" type="text/javascript"></script>
+    <script src="../../JS/main.js" type="text/javascript"></script>
+    <script src="../../JS/DashBoard/RupayCtrl.js" type="text/javascript"></script>
+    <style type="text/css">
+        .glyphicon-arrow-right:before
+        {
+            content: "\e092";
+        }
+        #rupaydashboardtable
+        {
+            font-size: 12px;
+            counter-reset: serial-number;
+        }
+        
+        #rupaydashboardtable #serial:rupay-child:before
+        {
+            counter-increment: serial-number;
+            content: counter(serial-number);
+        }
+        .fixed_headers thead tr th, .fixed_headers tbody tr td
+        {
+            padding: 2px;
+            text-align: center;
+        }
+        
+        .fixed_headers thead
+        {
+            background-color: #6b668c;
+            color: #ffffff;
+        }
+        
+        .fixed_headers tbody tr:nth-child(even)
+        {
+            background-color: #DCDCDC;
+        }
+    </style>
+</head>
+<body ng-controller="RupayCtrl">
+    <form name="rupaydashBoard">
+    <input type="button" value="Sort" ng-click="Sorting()" />
+    <a href="Rupay.htm">Refresh</a>
+    <div style="float: right; margin-bottom: 10px; margin-right: 10px">
+        <select ng-model="Time" ng-change="changedValue(Time)" data-ng-options="item as item.Time for item in Option">
+            <option value="">Last 2 Minute</option>
+        </select>
+        {{item.Time}}
+        <input type="text" id="search_field" ng-model="search" placeholder="Search Box" />
+    </div>
+    </form>
+    <div id="loader" style="display: none">
+    </div>
+    <table id="rupaydashboardtable" class="table table-stripped fixed_headers" style="padding: 2px">
+        <thead>
+            <tr>
+                <th>
+                    Sr No.
+                </th>
+                <th>
+                    PCODE
+                </th>
+                <th>
+                    TRACE
+                </th>
+                <th>
+                    X_CORRELATION_ID
+                </th>
+                <th>
+                    AMOUNT
+                </th>
+                <th>
+                    LOCAL_DATE
+                </th>
+                <th>
+                    TERMID
+                </th>
+                <th>
+                    LOCAL_TIME
+                </th>
+                <th>
+                    RESPCODE
+                </th>
+                <th>
+                    Response_Msg
+                </th>
+                <th>
+                    STAN
+                </th>
+                <th>
+                    AEPS_RUPAY_TranDate
+                </th>
+                <th>
+                    AEPS_RUPAY_TranTime
+                </th>
+                <th>
+                    AcquiringInstitution_Id
+                </th>
+                <th>
+                    LOCAL_TIME
+                </th>
+                <th>
+                    ReqType
+                </th>
+            </tr>
+        </thead>
+        <tbody ng-repeat="data in Response | orderBy:sortType:sortReverse | filter:search">
+            <tr>
+                <td id="serial"></td>
+                <td>{{data.PCODE}}</td>
+                <td>{{data.TRACE}}</td>
+                <td>{{data.X_CORRELATION_ID}}</td>
+                <td>{{data.AMOUNT}}</td>
+                <td>{{data.TERMID}}</td>
+                <td>{{data.TERMID}}</td>
+                <td>{{data.LOCAL_TIME}}</td>
+                <td>{{data.RESPCODE}}</td>
+                <td>{{data.Response_Msg}}</td>
+                <td>{{data.STAN}}</td>
+                <td>{{data.AEPS_RUPAY_TranDate}}</td>
+                <td>{{data.AEPS_RUPAY_TranTime}}</td>
+                <td>{{data.AcquiringInstitution_Id}}</td>
+                <td>{{data.LOCAL_TIME}}</td>
+                <td>{{data.ReqType}}</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

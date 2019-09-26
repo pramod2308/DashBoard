@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html data-ng-app="app">
+<head>
+    <title></title>
+    <link href="../../bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />      
+    <link href="../../Styles/DashBoard.css" rel="stylesheet" type="text/css" />
+
+    <script src="../../JS/jquery.js" type="text/javascript"></script>
+    <script src="../../JS/Comman/angular.js" type="text/javascript"></script>
+    <script src="../../JS/app.js" type="text/javascript"></script>
+    <script src="../../JS/main.js" type="text/javascript"></script>    
+    <script src="../../JS/DashBoard/DashBoardStatusCode.js" type="text/javascript"></script>
+          
+    <style rel="stylesheet" type="text/css">       
+        #dashboardstatuscodetable
+        {
+            font-size: 12px;
+            counter-reset: serial-number;
+        }
+        
+        #dashboardstatuscodetable #serial:first-child:before
+        {
+            counter-increment: serial-number;
+            content: counter(serial-number);
+        }
+        </style>
+</head>
+<body ng-controller="DashBoardStatusCodeCtrl">   
+<form name="thirddashBoard">
+    <input type="button" value="Sort" ng-click="Sorting()" />
+    <a href="Status_Code_Count.html">Refresh</a>
+
+    <div style="float:right;margin-bottom:10px;margin-right:10px">
+    <select ng-model="Time" ng-change="changedValue(Time)" 
+            data-ng-options="item as item.Time for item in Option">
+      <option value="">Last 2 Minute</option>
+    </select>
+     {{item.Time}}
+    
+    <input type="text" id="search_field" ng-model="search"  placeholder="Search Box"/>     
+     </div>  
+    </form>
+<br/>
+    <div id="loader" style="display:none">       
+    </div>    
+    <table id="dashboardstatuscodetable" class="table table-stripped fixed_headers" style="padding:2px">
+        <thead>
+            <tr>
+                <th>
+                    Sr No.
+                </th>
+                <th style="text-align: left">
+                    Request Type
+                </th>
+                <th>
+                   Layer Name
+                </th>               
+                <th>
+                   Status Code
+                </th>                
+                <th>
+                   Count
+                </th>
+                 <th>
+                    Node_IP_Address
+                </th>                   
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="data in Response | orderBy:sortType:sortReverse | filter:search">            
+                <td id="serial"></td>
+                <td style="text-align:left" >{{data.Request_Type}}</td>                              
+                <td>{{data.Layer_Name}}</td>               
+                <td>{{data.Status_Code}}</td>                                               
+                <td>{{data.Count}}</td>                   
+                <td>{{data.Node_IP_Address}}</td>                                                                                                                                                                                         
+            </tr>
+        </tbody>
+    </table>      
+</body>
+</html>
